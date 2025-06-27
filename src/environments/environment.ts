@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyCXpozkb2eDvh0WBLyO2g0JuCUaUStLHCg",
+    apiKey: "7cd8e20922d20cce7d7b0b278c634f2d", // "AIzaSyCXpozkb2eDvh0WBLyO2g0JuCUaUStLHCg",
     authDomain: "movieswebsite-c1036.firebaseapp.com",
     projectId: "movieswebsite-c1036",
     storageBucket: "movieswebsite-c1036.firebasestorage.app",
