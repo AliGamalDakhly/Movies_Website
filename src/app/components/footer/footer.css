@@ -1,0 +1,89 @@
+.custom-footer {
+  background-color: #1c1c1c;
+  color: #ccc;
+  padding: 22px 0;
+  font-size: 20px; /* ← زودنا الحجم */
+  border-top: 1px solid #333;
+}
+
+.footer-top {
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+/* الروابط */
+.footer-links a {
+  text-decoration: none;
+  color: #aaa;
+  transition: color 0.3s;
+  font-weight: 500;
+  font-size: 20px; /* ← زودنا الحجم */
+}
+
+.footer-links a:hover {
+  color: #ffcc00;
+}
+
+/* كلمة MovieApp */
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* ← مسافة خفيفة بين الأيقونة والنص */
+  white-space: nowrap;
+  font-size: 28px; /* ← زودنا الحجم */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* الأيقونة */
+.brand-icon {
+  color: #fff;
+  font-size: 28px; /* ← أكبر شويه */
+  line-height: 1;
+}
+
+/* النص المتدرّج */
+.brand-text {
+  font-weight: bold;
+  background: linear-gradient(to right, #ffcc00, #ffc107);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+
+/* الصف السفلي */
+.footer-bottom {
+  text-align: center;
+  font-size: 18px; /* ← زودنا الحجم */
+  color: #999;
+}
+
+.footer-copy {
+  text-align: center;
+  color: #aaa;
+  font-size: 15px;
+}
+
+.text-yellow {
+  color: #ffcc00;
+}
+
+/* الأيقونات */
+.social-icon {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 20px; /* ← زودنا الحجم */
+  transition: color 0.3s;
+}
+
+.social-icon:hover {
+  color: #ffcc00;
+}
+
+/* تصغير الحاوية قليلاً */
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
