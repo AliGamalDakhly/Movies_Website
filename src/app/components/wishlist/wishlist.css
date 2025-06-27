@@ -1,0 +1,26 @@
+.wishlist-empty {
+    padding: 50px 20px;
+    color: #555;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.wishlist-empty img {
+    width: 120px;
+    opacity: 0.8;
+}
+
+.wishlist-empty h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.wishlist-empty p {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.wishlist-empty .btn:hover {
+    background-color: #e73370 !important;
+}
+
