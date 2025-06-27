@@ -21,7 +21,7 @@ export class Wishlist {
     original_language: 'en',
     original_title: 'movie',
     overview: 'dfbvdf brberdg gtrh ',
-    poster_path: 'csdvdsf',
+    poster_path: 'https://image.tmdb.org/t/p/w500/6WxhEvFsauuACfv8HyoVX6mZKFj.jpg',
     release_date: '15/5/199',
     vote_average: 3.5
       },
@@ -33,7 +33,7 @@ export class Wishlist {
     original_language: 'en',
     original_title: 'movie',
     overview: 'dfbvdf brberdg gtrh ',
-    poster_path: 'csdvdsf',
+    poster_path: 'https://image.tmdb.org/t/p/w500/7c5VBuCbjZOk7lSfj9sMpmDIaKX.jpg',
     release_date: '15/5/199',
     vote_average: 3.5
       },
@@ -45,7 +45,7 @@ export class Wishlist {
     original_language: 'en',
     original_title: 'movie',
     overview: 'dfbvdf brberdg gtrh ',
-    poster_path: 'csdvdsf',
+    poster_path: 'https://image.tmdb.org/t/p/w500/q5pXRYTycaeW6dEgsCrd4mYPmxM.jpg',
     release_date: '15/5/199',
     vote_average: 3.5
       }
