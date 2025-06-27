@@ -1,0 +1,42 @@
+<div class="details-container" *ngIf="movie">
+  <div class="movie-card">
+    <img [src]="movie.poster" [alt]="movie.title" class="movie-poster" />
+    <div class="movie-info">
+      <h1>{{ movie.title }}</h1>
+      <p class="release-date">{{ movie.releaseDate | date: 'MMM d, y' }}</p>
+
+      <div class="rating" *ngIf="movie.rating && movie.votes">
+        <span class="stars">{{ getStarRating(movie.rating) }}</span>
+        <span class="votes">{{ movie.votes | number }}</span>
+      </div>
+
+      <p class="description">{{ movie.description }}</p>
+
+      <div class="genres" *ngIf="movie.genres?.length">
+        <span class="genre" *ngFor="let genre of movie.genres">
+          {{ genre }}
+        </span>
+      </div>
+
+      <div class="details">
+        <p><strong>Duration:</strong> {{ movie.duration }} Min.</p>
+        <p><strong>Languages:</strong> {{ movie.languages?.join(', ') }}</p>
+      </div>
+
+      <p class="studio" *ngIf="movie.studio">{{ movie.studio }}</p>
+
+      <a *ngIf="movie.website" [href]="movie.website" target="_blank" class="website">Website</a>
+    </div>
+  </div>
+
+  <div class="recommendations" *ngIf="recommendations?.length">
+    <h2>Recommendations</h2>
+    <div class="recommendation-list">
+      <div class="recommendation-card" *ngFor="let rec of recommendations">
+        <img [src]="rec.poster" [alt]="rec.title" />
+        <h3>{{ rec.title }}</h3>
+        <p class="rec-date">{{ rec.releaseDate | date: 'MMM d, y' }}</p>
+      </div>
+    </div>
+  </div>
+</div>
