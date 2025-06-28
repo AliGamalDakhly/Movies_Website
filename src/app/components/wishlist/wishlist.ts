@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
-import { Imovie } from '../../interfaces/imovie';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MovieItem } from '../../Models/movie-item';
+import { Firebase } from '../../services/firebase';
+import { Movies } from '../../services/movies';
+import { User } from '../../Models/user';
+import { firstValueFrom } from 'rxjs';
 
 type StarType = 'full' | 'half' | 'empty';
 
@@ -10,48 +14,37 @@ type StarType = 'full' | 'half' | 'empty';
   templateUrl: './wishlist.html',
   styleUrl: './wishlist.css'
 })
-export class Wishlist {
+export class Wishlist implements OnInit {
 
-   wishlist: Imovie[] = [
-  {
-    id : 1,
-    adult: true,
-    title: 'Movie',
-    genre_ids: [1,2],
-    original_language: 'en',
-    original_title: 'movie',
-    overview: 'dfbvdf brberdg gtrh ',
-    poster_path: 'https://image.tmdb.org/t/p/w500/6WxhEvFsauuACfv8HyoVX6mZKFj.jpg',
-    release_date: '15/5/199',
-    vote_average: 3.5
-      },
+    tempwish: MovieItem[] = [];
+    currentUser: User| null = null;
+
+    constructor(private firebaseService: Firebase,private movieService: Movies){
+      
+    }
+    
+    async ngOnInit() 
     {
-    id : 3,
-    adult: true,
-    title: 'Movie',
-    genre_ids: [1,2],
-    original_language: 'en',
-    original_title: 'movie',
-    overview: 'dfbvdf brberdg gtrh ',
-    poster_path: 'https://image.tmdb.org/t/p/w500/7c5VBuCbjZOk7lSfj9sMpmDIaKX.jpg',
-    release_date: '15/5/199',
-    vote_average: 3.5
-      },
-    {
-    id : 2,
-    adult: true,
-    title: 'Movie',
-    genre_ids: [1,2],
-    original_language: 'en',
-    original_title: 'movie',
-    overview: 'dfbvdf brberdg gtrh ',
-    poster_path: 'https://image.tmdb.org/t/p/w500/q5pXRYTycaeW6dEgsCrd4mYPmxM.jpg',
-    release_date: '15/5/199',
-    vote_average: 3.5
+      console.log('oninit func');
+      this.currentUser = await this.firebaseService.getUserByName('Ali');
+      console.log('User loaded:', this.currentUser);
+
+      if (this.currentUser) 
+      {
+          console.log(this.currentUser.UserName);
+          for(let movieId of this.currentUser.Wishlist)
+          {
+            try {
+              const movie = await firstValueFrom(this.movieService.getMovieById(movieId));
+              movie.poster_path = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+              this.tempwish.push(movie);
+            } catch (error) {
+              console.error('Failed to load movie', error);
+            }
+          }
       }
-    ];
 
-
+}
     
 
   getStarsFromRating(rating: number): StarType[] 
@@ -74,10 +67,18 @@ export class Wishlist {
 
 removeFromWishlist(movieId: number)
 {
-  this.wishlist = this.wishlist.filter(movie => {
+  this.tempwish = this.tempwish.filter(movie => {
     return movie.id != movieId;
   })
+
+  if(this.currentUser != null)
+  {
+    this.firebaseService.removeFromWishlist(this.currentUser.id, movieId);
+  }
+    
 }
+
+
 
   // we have to get the logged user
   // then we get movies he added to wishlist (from movie service , filter the movies)

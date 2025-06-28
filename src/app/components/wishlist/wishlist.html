@@ -1,4 +1,4 @@
-@if (wishlist.length == 0)
+@if (tempwish.length == 0)
 {
     <div class="container-fluid p-5 bg-black">
         <div class="wishlist-empty text-center my-5">
@@ -17,7 +17,7 @@
     <div class="container-fluid p-5 bg-black">
         <div class="container">
             <div class="row gy-4">
-                @for (movie of wishlist; track movie.id)
+                @for (movie of tempwish; track movie.id)
                 {
                     <div class="col-lg-6 col-md-10 col-sm-12 mx-auto">
                         <div class="card shadow rounded-4 p-3">
