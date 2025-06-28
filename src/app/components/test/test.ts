@@ -12,6 +12,6 @@ export class Test {
   movies: any[] = [];
 
   constructor(private firebaseService: Firebase) {
-    this.firebaseService.getMovies().subscribe(data => this.movies = data);
+    
   }
 }
