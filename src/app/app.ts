@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { Test } from './components/test/test';
+import { Login } from './components/login/login';
+import { Register } from './components/register/register';
 import { SearchBar } from './components/search-bar/search-bar';
 import { MovieCard } from "./components/movie-card/movie-card";
 
@@ -15,7 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Test,Navbar,Footer,FormsModule,CommonModule,TranslateModule, Wishlist, MovieCard],
+  imports: [RouterOutlet, Test,Navbar,Footer,FormsModule,CommonModule,TranslateModule, Wishlist, MovieCard,Login,Register],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
