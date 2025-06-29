@@ -2,3 +2,17 @@
 @import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body.dark-mode {
+  background-color: black !important;
+  color: yellow !important;
+}
+
+body.dark-mode .navbar {
+  background-color: #222 !important;
+}
+
+body.dark-mode .nav-link {
+  color: orange !important;
+}
+

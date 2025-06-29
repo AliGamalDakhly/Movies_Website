@@ -7,13 +7,14 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'app-navbar',
   imports: [FormsModule,CommonModule,TranslateModule],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.css'
+  styleUrls: ['./navbar.css']
 })
 export class Navbar implements OnInit {
 
   language = 'en';
   languages = ['en', 'ar', 'fr', 'zh'];
   username: string | null = null;
+  menuOpen = false;
 
   ngOnInit(): void {
     const savedLang = localStorage.getItem('lang');
@@ -45,8 +46,14 @@ export class Navbar implements OnInit {
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }
 
+  // logout() {
+  //   localStorage.removeItem('username');
+  //   this.username = null;
+  // }
+
   logout() {
-    localStorage.removeItem('username');
-    this.username = null;
-  }
+  localStorage.removeItem('username');
+  this.username = null;
+  window.location.href = '/'; 
+}
 }

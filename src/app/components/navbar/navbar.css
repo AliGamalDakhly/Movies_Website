@@ -1,9 +1,10 @@
+
 .navbar .nav-link {
   font-weight: bold;
   font-size: 18px;
 }
 
-/* MovieApp container */
+
 .app-title {
   font-size: 32px;
   font-weight: bold;
@@ -15,28 +16,25 @@
   gap: 5px;
 }
 
-/* الرمز 🎬 يفضل بلونه الطبيعي */
 .app-title .icon {
   color: white;
   font-size: 28px;
 }
 
-/* الكلمة MovieApp بتدرج ولمعة */
 .app-title .text {
   background: linear-gradient(90deg, #ffd700, #ff9900, #ffd700);
   background-size: 200%;
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shine 3s linear infinite;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Hover effect */
 .app-title:hover {
   transform: scale(1.08);
 }
 
-/* Animation للمعة */
 @keyframes shine {
   0% {
     background-position: 0% center;
@@ -45,3 +43,15 @@
     background-position: 200% center;
   }
 }
+
+/* === Dropdown for Small Screens === */
+.dropdown-menu-custom {
+  position: absolute;
+  top: 60px;
+  z-index: 1050;
+  width: 220px;
+  transition: all 0.3s ease;
+}
+
+
+
