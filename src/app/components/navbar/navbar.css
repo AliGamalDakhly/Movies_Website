@@ -1,12 +1,6 @@
 
-.navbar .nav-link {
-  font-weight: bold;
-  font-size: 18px;
-}
-
-
 .app-title {
-  font-size: 32px;
+  font-size: 50px;
   font-weight: bold;
   letter-spacing: 1px;
   text-decoration: none;
@@ -15,12 +9,10 @@
   align-items: center;
   gap: 5px;
 }
-
 .app-title .icon {
   color: white;
-  font-size: 28px;
+  font-size: 37px;
 }
-
 .app-title .text {
   background: linear-gradient(90deg, #ffd700, #ff9900, #ffd700);
   background-size: 200%;
@@ -30,7 +22,6 @@
   animation: shine 3s linear infinite;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
 .app-title:hover {
   transform: scale(1.08);
 }
@@ -44,14 +35,79 @@
   }
 }
 
-/* === Dropdown for Small Screens === */
-.dropdown-menu-custom {
-  position: absolute;
-  top: 60px;
-  z-index: 1050;
-  width: 220px;
+
+.btn-nav {
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+  font-weight: bold;
+  padding: 5px 10px;
+  font-size: 28px;
+  border-radius: 4px;
+  transition: 0.3s ease;
+}
+
+.navbar .nav-link {
+  font-size: 30px; 
+  font-weight: bold;
+  padding: 15px 15px;
+}
+
+.navbar-nav {
+  padding-top: 6px; 
+}
+body.dark-mode {
+  background-color: #121212;
+  color: #f1f1f1;
   transition: all 0.3s ease;
 }
 
+body.dark-mode .navbar {
+  background-color: #1f1f1f !important;
+}
 
+body.dark-mode .nav-link,
+body.dark-mode .dropdown-item {
+  color: #ffcc00 !important;
+}
+
+body.dark-mode .app-title .text {
+  background: linear-gradient(90deg, #ffcc00, #ffc107);
+  background-size: 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body.dark-mode .btn-nav {
+  background-color: #000 !important;
+  color: #ffcc00 !important;
+  border-color: #888 !important;
+}
+
+
+.dropdown-menu-custom .btn-nav {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+
+.dropdown-menu-custom {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1050;
+  width: 220px;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  background-color: #1f1f1f;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+
+[dir="rtl"] .dropdown-menu-custom {
+  right: auto;
+  left: 0;
+}
 

@@ -1,22 +1,33 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { Language } from '../../services/language';
+
 
 @Component({
   selector: 'app-navbar',
-  imports: [FormsModule,CommonModule,TranslateModule],
+  imports: [FormsModule,CommonModule,TranslateModule,RouterLink],
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.css']
 })
 export class Navbar implements OnInit {
 
-  language = 'en';
+   language = 'en';
   languages = ['en', 'ar', 'fr', 'zh'];
   username: string | null = null;
   menuOpen = false;
+  
+  constructor(private languageService: Language) {}
 
   ngOnInit(): void {
+
+    this.username = localStorage.getItem('username');
+
+    this.language = this.languageService.currentLanguage;
+    
+
     const savedLang = localStorage.getItem('lang');
     if (savedLang) {
       this.language = savedLang;
@@ -28,12 +39,13 @@ export class Navbar implements OnInit {
       document.body.classList.add('dark-mode');
     }
 
-    this.username = localStorage.getItem('username');
-  }
+    
+    //this.wishlistCount = this.firebaseService.wishlist.length;
 
-  changeLanguage() {
-    localStorage.setItem('lang', this.language);
-    this.applyDirection(this.language);
+    }
+
+   changeLanguage() {
+    this.languageService.setLanguage(this.language);
   }
 
   applyDirection(lang: string) {
@@ -43,17 +55,15 @@ export class Navbar implements OnInit {
 
   toggleDarkMode() {
     const isDark = document.body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    localStorage.setItem('theme', isDark ? 'light': 'dark' );
   }
 
-  // logout() {
-  //   localStorage.removeItem('username');
-  //   this.username = null;
-  // }
-
+  
   logout() {
-  localStorage.removeItem('username');
-  this.username = null;
-  window.location.href = '/'; 
-}
+    localStorage.removeItem('username');
+    this.username = null;
+    window.location.href = '/'; 
+  }
+
+ 
 }
