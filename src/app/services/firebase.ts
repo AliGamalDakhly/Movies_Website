@@ -22,6 +22,7 @@ export class Firebase {
   // on init => i load all movies in the wishlist of the user. they are available for each one use the service.
   async Init() 
   {
+    this.wishlist = [];
     this.currentUser = await this.getUserByName('Ali');
 
     if (this.currentUser) 
