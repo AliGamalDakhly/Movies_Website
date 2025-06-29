@@ -39,11 +39,12 @@ export class Movies {
     )
   }
 
+  /* Added By: Ali Gamal */
   getMovieById(Id: number): Observable<MovieItem> {
   const url = `https://api.themoviedb.org/3/movie/${Id}?api_key=${environment.firebaseConfig.apiKey}`;
   return this.HttpFetchData.get<MovieItem>(url);
-}
-
+  }
+  /* End Of Code*/
   
 
 }
