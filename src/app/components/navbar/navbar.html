@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 py-2" [attr.dir]="language === 'ar' ? 'rtl' : 'ltr'">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 py-2" [attr.dir]="language === 'ar' ? 'rtl' : 'ltr'">
   <a class="navbar-brand app-title" routerLink="/">
   <span class="icon">🎬</span><span class="text">MovieApp</span>
 </a>
@@ -14,17 +14,79 @@
     </ul>
 
     <div class="d-flex align-items-center gap-3">
-      <!-- Dropdown لغة -->
+      
       <select class="form-select form-select-sm" [(ngModel)]="language" (change)="changeLanguage()">
         <option *ngFor="let lang of languages" [value]="lang">{{ lang }}</option>
       </select>
 
-      <!-- Dark mode -->
+      
       <button class="btn btn-outline-light btn-sm" (click)="toggleDarkMode()">🌙</button>
 
-      <!-- Login / Username -->
+     
       <span class="text-white" *ngIf="username">Hi, {{ username }}</span>
       <a *ngIf="!username" class="btn btn-outline-light btn-sm" routerLink="/login">Login</a>
     </div>
   </div>
+</nav> -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 py-3" [attr.dir]="language === 'ar' ? 'rtl' : 'ltr'">
+  <div class="container-fluid">
+    <div class="d-flex align-items-center gap-4">
+      <a class="navbar-brand app-title" routerLink="/">
+        <span class="icon">🎬</span><span class="text">MovieApp</span>
+      </a>
+
+      <ul class="navbar-nav d-flex flex-row gap-3 mb-0">
+        <li class="nav-item">
+          <a class="nav-link fw-bold" routerLink="/">{{ language === 'ar' ? 'الرئيسية' : 'Home' }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold" routerLink="/wishlist">{{ language === 'ar' ? 'المفضلة' : 'Wishlist' }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <button class="navbar-toggler" type="button" (click)="menuOpen = !menuOpen">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end mt-3 mt-lg-0 d-none d-lg-flex">
+      <div class="d-flex flex-row align-items-center gap-2">
+        <select class="form-select form-select-sm w-auto" [(ngModel)]="language" (change)="changeLanguage()">
+          <option value="en">en</option>
+          <option value="ar">ar</option>
+        </select>
+
+        <button class="btn btn-outline-light btn-sm w-auto" (click)="toggleDarkMode()">🌙</button>
+
+        <span class="text-white" *ngIf="username">Hi, {{ username }}</span>
+        <a *ngIf="!username" class="btn btn-outline-light btn-sm" routerLink="/login">Login</a>
+      </div>
+    </div>
+
+  <div
+  *ngIf="menuOpen"
+  class="dropdown-menu-custom d-lg-none mt-2 shadow rounded bg-dark p-3"
+  [ngStyle]="language === 'ar' ? { left: '15px', right: 'auto' } : { right: '15px', left: 'auto' }">
+
+      <!-- <a class="dropdown-item text-white fw-bold mb-2" routerLink="/">{{ language === 'ar' ? 'الرئيسية' : 'Home' }}</a>
+      <a class="dropdown-item text-white fw-bold mb-2" routerLink="/wishlist">{{ language === 'ar' ? 'المفضلة' : 'Wishlist' }}</a> -->
+
+      <hr class="bg-secondary">
+
+      <select class="form-select form-select-sm mb-2" [(ngModel)]="language" (change)="changeLanguage()">
+        <option value="en">en</option>
+        <option value="ar">ar</option>
+      </select>
+
+      <button class="btn btn-sm btn-outline-light mb-2 w-100" (click)="toggleDarkMode()">🌙</button>
+
+      <span class="text-white" *ngIf="username">Hi, {{ username }}</span>
+      <button *ngIf="username" class="btn btn-outline-light btn-sm" (click)="logout()">Logout</button>
+      <a *ngIf="!username" class="btn btn-outline-light btn-sm w-100" routerLink="/login">Login</a>
+    </div>
+
+  </div>
 </nav>
+
+
+
