@@ -10,7 +10,13 @@
                 <mat-card-content class="text-start">
                     <h6 class="mt-4">{{movie.title}}</h6>
                     <p class="d-inline">{{movie.release_date | date: 'longDate'}}</p>
-                    <i class="fa-regular fa-heart add-to-favourite"></i>
+                    @if(isInWishlist(movie.id))
+                    {
+                        <i (click)="ToggleToWishlist(movie.id)" class="fa-solid fa-heart add-to-favourite"></i>
+                    }
+                    @else {
+                        <i (click)="ToggleToWishlist(movie.id)" class="fa-regular fa-heart add-to-favourite"></i>
+                    }
                 </mat-card-content>
                 
             </mat-card>

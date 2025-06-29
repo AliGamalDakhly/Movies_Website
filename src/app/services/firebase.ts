@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Firestore, collection, addDoc, collectionData, doc, getDoc, DocumentData, query, where, getDocs, updateDoc, arrayRemove } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, doc, getDoc, DocumentData, query, where, getDocs, updateDoc, arrayRemove, arrayUnion } from '@angular/fire/firestore';
 import { firstValueFrom, Observable } from 'rxjs';
 import { User } from '../Models/user';
 import { MovieItem } from '../Models/movie-item';
@@ -57,18 +57,33 @@ export class Firebase {
   }
 
 
-async removeFromWishlist(username: string, movieId: number) {
-  const userDocRef = doc(this.firestore, 'Users', username);
+  async addToWishlist(username: string, movieId: number): Promise<void> {
+    const userDocRef = doc(this.firestore, 'Users', username);
 
-  try {
-    await updateDoc(userDocRef, {
-      Wishlist: arrayRemove(movieId)
-    });
-    console.log(`Movie ${movieId} removed from ${username}'s wishlist.`);
-  } catch (error) {
-    console.error('Error removing movie from wishlist:', error);
+    try {
+      await updateDoc(userDocRef, {
+        Wishlist: arrayUnion(movieId)
+      });
+      console.log(`Movie ${movieId} added to ${username}'s wishlist.`);
+    } catch (error) {
+      console.error('Error adding movie to wishlist:', error);
+    }
   }
-}
+
+  async removeFromWishlist(username: string, movieId: number) {
+
+    this.wishlist = this.wishlist.filter(movie => movie.id != movieId);
+    const userDocRef = doc(this.firestore, 'Users', username);
+
+    try {
+      await updateDoc(userDocRef, {
+        Wishlist: arrayRemove(movieId)
+      });
+      console.log(`Movie ${movieId} removed from ${username}'s wishlist.`);
+    } catch (error) {
+      console.error('Error removing movie from wishlist:', error);
+    }
+  }
 
 
 }
