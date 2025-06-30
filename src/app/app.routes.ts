@@ -1,4 +1,5 @@
 
+
 import { NgModule } from '@angular/core';
 import { RouterModule,Routes } from '@angular/router';
 import { Login } from './components/login/login';
@@ -8,7 +9,6 @@ import { Wishlist } from './components/wishlist/wishlist';
 import { MovieDetails } from './components/movie-details/movie-details';
 
 
-
 export const routes: Routes = [
     //  { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '', component: MovieCard },
@@ -16,8 +16,6 @@ export const routes: Routes = [
       { path: 'register', component: Register },
       { path: 'wishlist', component: Wishlist },
       { path: 'movie/:id', component: MovieDetails },
-
-      
 ];
 
 @NgModule({
