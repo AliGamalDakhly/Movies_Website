@@ -4,12 +4,13 @@ import { MovieItem } from '../../Models/movie-item';
 import { Firebase } from '../../services/firebase';
 import { Movies } from '../../services/movies';
 import { User } from '../../Models/user';
+import { RouterLink } from '@angular/router';
 
 type StarType = 'full' | 'half' | 'empty';
 
 @Component({
   selector: 'app-wishlist',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './wishlist.html',
   styleUrl: './wishlist.css'
 })

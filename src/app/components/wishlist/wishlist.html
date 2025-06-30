@@ -36,7 +36,9 @@
 
                 <!-- Poster -->
                 <div class="col-md-4">
-                  <img [src]="movie.poster_path" class="img-fluid rounded-4" alt="{{ movie.title }}" />
+                  <a [routerLink]="['/movie', movie.id]">
+                    <img [src]="movie.poster_path" class="img-fluid rounded-4" alt="{{ movie.title }}" />
+                  </a>
                 </div>
 
                 <!-- Movie Info -->
