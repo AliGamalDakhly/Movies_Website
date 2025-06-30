@@ -9,10 +9,11 @@ import { SearchBar } from '../search-bar/search-bar';
 import { Firebase } from '../../services/firebase';
 import { User } from '../../Models/user';
 import { firstValueFrom } from 'rxjs';
+import { RouterLink } from '@angular/router'; 
 
 @Component({
   selector: 'app-movie-card',
-  imports: [SearchBar,CommonModule, MatButtonModule, MatCardModule,MatPaginatorModule],
+  imports: [SearchBar,CommonModule, MatButtonModule, MatCardModule,MatPaginatorModule,RouterLink],
   templateUrl: './movie-card.html',
   styleUrl: './movie-card.css'
 })

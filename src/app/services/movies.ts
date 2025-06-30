@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class Movies {
-
+constructor(private http: HttpClient) {} 
   baseAPIURL = "https://api.themoviedb.org/3";
   pageNumber:number=0;
   HttpFetchData = inject(HttpClient);
@@ -46,5 +46,14 @@ export class Movies {
   }
   /* End Of Code*/
   
+getMovieVideos(movieId: number) {
+  return this.http.get<any>(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${environment.firebaseConfig.apiKey}`);
+}
+getRecommendedMovies(movieId: number) {
+  return this.http.get<any>(
+    `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${environment.firebaseConfig.apiKey}`
+  );
+}
+
 
 }

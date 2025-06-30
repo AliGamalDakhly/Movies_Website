@@ -5,7 +5,8 @@ import { Login } from './components/login/login';
 import { Register } from './components/register/register';
 import { MovieCard } from './components/movie-card/movie-card';
 import { Wishlist } from './components/wishlist/wishlist';
-// import { MovieDetailsComponent } from '../app/components/movie-details/movie-details';
+import { MovieDetails } from './components/movie-details/movie-details';
+
 
 
 export const routes: Routes = [
@@ -14,11 +15,9 @@ export const routes: Routes = [
       { path: 'login', component: Login },
       { path: 'register', component: Register },
       { path: 'wishlist', component: Wishlist },
-  // { path: 'movie/:id', component: MovieDetailsComponent },
-  // { path: '', redirectTo: 'movie/1', pathMatch: 'full' } // مؤقتًا
+      { path: 'movie/:id', component: MovieDetails },
 
-
-
+      
 ];
 
 @NgModule({
