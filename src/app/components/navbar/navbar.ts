@@ -24,18 +24,18 @@ export class Navbar implements OnInit {
 
   ngOnInit(): void {
 
-    this.username = localStorage.getItem('username');
+    this.username = sessionStorage.getItem('username');
 
     this.language = this.languageService.currentLanguage;
     
 
-    const savedLang = localStorage.getItem('lang');
+    const savedLang = sessionStorage.getItem('lang');
     if (savedLang) {
       this.language = savedLang;
       this.applyDirection(savedLang);
     }
 
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme = sessionStorage.getItem('theme');
     if (savedTheme === 'dark') {
       document.body.classList.add('dark-mode');
     }
@@ -56,12 +56,12 @@ export class Navbar implements OnInit {
 
   toggleDarkMode() {
     const isDark = document.body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', isDark ? 'light': 'dark' );
+    sessionStorage.setItem('theme', isDark ? 'light': 'dark' );
   }
 
   
   logout() {
-    localStorage.removeItem('username');
+    sessionStorage.removeItem('username');
     this.username = null;
     window.location.href = '/'; 
   }

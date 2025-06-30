@@ -1,6 +1,6 @@
 
 .app-title {
-  font-size: 50px;
+  font-size: 45px;
   font-weight: bold;
   letter-spacing: 1px;
   text-decoration: none;
@@ -11,7 +11,7 @@
 }
 .app-title .icon {
   color: white;
-  font-size: 37px;
+  font-size: 35px;
 }
 .app-title .text {
   background: linear-gradient(90deg, #ffd700, #ff9900, #ffd700);
@@ -42,13 +42,13 @@
   border: 1px solid #ccc;
   font-weight: bold;
   padding: 5px 10px;
-  font-size: 28px;
+  font-size: 24px;
   border-radius: 4px;
   transition: 0.3s ease;
 }
 
 .navbar .nav-link {
-  font-size: 30px; 
+  font-size: 28px; 
   font-weight: bold;
   padding: 15px 15px;
 }
