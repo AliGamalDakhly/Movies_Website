@@ -13,6 +13,7 @@ import { MovieDetails } from './components/movie-details/movie-details';
 export const routes: Routes = [
     //  { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '', component: MovieCard },
+      { path: 'moviecard', component: MovieCard },
       { path: 'login', component: Login },
       { path: 'register', component: Register },
       { path: 'wishlist', component: Wishlist },

@@ -76,7 +76,7 @@ export class Register {
             console.log('Registration successful:', userCredential);
             this.isLoading = false;
             // Redirect to dashboard or login page
-            this.router.navigate(['/navbar']); // Change route as needed
+            this.router.navigate(['/moviecard']); // Change route as needed
           },
           error: (error) => {
             console.error('Registration error:', error);

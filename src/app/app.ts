@@ -20,7 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-root',
 
-  imports: [RouterOutlet, Test,Navbar,Footer,FormsModule,CommonModule,TranslateModule, Wishlist, MovieCard,Login,Register],
+  imports: [RouterOutlet,Navbar,Footer,FormsModule,CommonModule,TranslateModule, Wishlist, MovieCard,Login,Register],
 
   templateUrl: './app.html',
   styleUrl: './app.css'
