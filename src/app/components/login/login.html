@@ -11,43 +11,70 @@
         <div class="card-body py-5 px-md-5">
             
             <div class="welcom">
-                <h2>Welcome Back</h2>
-                
-        
+                <h2>Welcome Back</h2>  
         </div>
+         <!-- Error Message -->
+            <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+              {{ errorMessage }}
+            </div>
 
             
 
-          <form>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <!-- Email input -->
             <div data-mdb-input-init class="form-outline mb-4">
                 <label class="form-label" for="form2Example1">Email address</label>
-              <input type="email" id="form2Example1" class="form-control" />
+
+              <input
+              type="email" 
+                id="form2Example1" 
+                class="form-control"
+                formControlName="email"
+                [class.is-invalid]="email?.invalid && email?.touched"
+                />
+                <div *ngIf="email?.invalid && email?.touched" class="invalid-feedback">
+                <div *ngIf="email?.errors?.['required']">Email is required.</div>
+                <div *ngIf="email?.errors?.['email']">Please enter a valid email address.</div>
+              </div>
               
             </div>
 
             <!-- Password input -->
             <div data-mdb-input-init class="form-outline mb-4">
                  <label class="form-label" for="form2Example2">Password</label>
-              <input type="password" id="form2Example2" class="form-control" />
-             
+
+              <input 
+              type="password" 
+                id="form2Example2" 
+                class="form-control"
+                formControlName="password"
+                [class.is-invalid]="password?.invalid && password?.touched"
+               />
+             <div *ngIf="password?.invalid && password?.touched" class="invalid-feedback">
+                <div *ngIf="password?.errors?.['required']">Password is required.</div>
+                <div *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters long.</div>
+              </div>
             </div>
 
             <div class="row mb-4">
-  <div class="col d-flex justify-content-end">
-    <!-- Simple link -->
-    <a routerLink="/register">Forgot password?</a>
-  </div>
-</div>
+              <div class="col d-flex justify-content-end">
+                   <!-- Simple link -->
+                         <a routerLink="/register">Forgot password?</a>
+              </div>
+               </div>
 
-
-
-           
 
             <!-- Submit button -->
-            <button  type="button" data-mdb-button-init data-mdb-ripple-init 
-            class="btn btn-primary btn-block mb-4"
-            >Sign in</button>
+            <button  
+              type="submit" 
+              data-mdb-button-init 
+              data-mdb-ripple-init 
+              class="btn btn-primary btn-block mb-4"
+              [disabled]="isLoading || loginForm.invalid"
+            >
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              {{ isLoading ? 'Signing in...' : 'Sign in' }}
+            </button>
 
              <div class="signup-text">
           Don't have an account? <a [routerLink]="['/register']" routerLinkActive="active" class="text-yellow">Sign up</a>

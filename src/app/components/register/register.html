@@ -16,41 +16,112 @@
 
         <div class="card bg-glass">
           <div class="card-body px-4 py-5 px-md-5">
-            <form>
+
+             <!-- Error Message -->
+            <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+              {{ errorMessage }}
+            </div>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
               <!-- 2 column grid layout with text inputs for the first and last names -->
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div data-mdb-input-init class="form-outline">
-                    <input type="text" id="form3Example1" class="form-control" />
+                    <input 
+                    type="text" 
+                      id="form3Example1" 
+                      class="form-control"
+                      formControlName="firstName"
+                      [class.is-invalid]="firstName?.invalid && firstName?.touched"
+                     />
                     <label class="form-label" for="form3Example1">First name</label>
+                     <div *ngIf="firstName?.invalid && firstName?.touched" class="invalid-feedback">
+                      <div *ngIf="firstName?.errors?.['required']">First name is required.</div>
+                      <div *ngIf="firstName?.errors?.['minlength']">First name must be at least 2 characters long.</div>
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
                   <div data-mdb-input-init class="form-outline">
-                    <input type="text" id="form3Example2" class="form-control" />
+                    <input 
+                     type="text" 
+                      id="form3Example2" 
+                      class="form-control"
+                      formControlName="lastName"
+                      [class.is-invalid]="lastName?.invalid && lastName?.touched"
+                     />
                     <label class="form-label" for="form3Example2">Last name</label>
+                    <div *ngIf="lastName?.invalid && lastName?.touched" class="invalid-feedback">
+                      <div *ngIf="lastName?.errors?.['required']">Last name is required.</div>
+                      <div *ngIf="lastName?.errors?.['minlength']">Last name must be at least 2 characters long.</div>
+                    </div>
                   </div>
                 </div>
               </div>
 
               <!-- Email input -->
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="email" id="form3Example3" class="form-control" />
+                <input
+                 type="email" 
+                  id="form3Example3" 
+                  class="form-control"
+                  formControlName="email"
+                  [class.is-invalid]="email?.invalid && email?.touched" 
+                 />
                 <label class="form-label" for="form3Example3">Email address</label>
+                <div *ngIf="email?.invalid && email?.touched" class="invalid-feedback">
+                  <div *ngIf="email?.errors?.['required']">Email is required.</div>
+                  <div *ngIf="email?.errors?.['email']">Please enter a valid email address.</div>
+                </div>
               </div>
 
               <!-- Password input -->
               <div data-mdb-input-init class="form-outline mb-4">
-                <input type="password" id="form3Example4" class="form-control" />
+                <input 
+                 type="password" 
+                  id="form3Example4" 
+                  class="form-control"
+                  formControlName="password"
+                  [class.is-invalid]="password?.invalid && password?.touched" 
+                />
                 <label class="form-label" for="form3Example4">Password</label>
+                <div *ngIf="password?.invalid && password?.touched" class="invalid-feedback">
+                  <div *ngIf="password?.errors?.['required']">Password is required.</div>
+                  <div *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters long.</div>
+                </div>
+              </div>
+               <!-- Confirm Password input -->
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input 
+                  type="password" 
+                  id="form3Example5" 
+                  class="form-control"
+                  formControlName="confirmPassword"
+                  [class.is-invalid]="confirmPassword?.invalid && confirmPassword?.touched"
+                />
+                <label class="form-label" for="form3Example5">Confirm Password</label>
+                <div *ngIf="confirmPassword?.invalid && confirmPassword?.touched" class="invalid-feedback">
+                  <div *ngIf="confirmPassword?.errors?.['required']">Please confirm your password.</div>
+                  <div *ngIf="confirmPassword?.errors?.['passwordMismatch']">Passwords do not match.</div>
+                </div>
               </div>
 
              
 
               <!-- Submit button -->
-               <button  type="button" data-mdb-button-init data-mdb-ripple-init 
-            class="btn btn-primary btn-block mb-4"
-            >Sign in</button>
+              <button  
+                type="submit" 
+                data-mdb-button-init 
+                data-mdb-ripple-init 
+                class="btn btn-primary btn-block mb-4"
+                [disabled]="isLoading || registerForm.invalid"
+              >
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                {{ isLoading ? 'Creating Account...' : 'Sign Up' }}
+              </button>
+
+              <div class="signup-text text-center">
+                Already have an account? <a [routerLink]="['/login']" routerLinkActive="active" class="text-yellow">Sign in</a>
+              </div>
 
 
              

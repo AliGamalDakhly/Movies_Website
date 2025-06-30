@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
-  imports: [FormsModule,CommonModule,TranslateModule],
+  imports: [FormsModule,CommonModule,TranslateModule,RouterLink],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css'
 })
@@ -50,3 +51,16 @@ export class Navbar implements OnInit {
     this.username = null;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
