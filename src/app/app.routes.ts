@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule,Routes } from '@angular/router';
 import { Login } from './components/login/login';
 import { Register } from './components/register/register';
+import { Navbar } from './components/navbar/navbar';
 import { MovieCard } from './components/movie-card/movie-card';
 import { Wishlist } from './components/wishlist/wishlist';
 import { MovieDetails } from './components/movie-details/movie-details';
