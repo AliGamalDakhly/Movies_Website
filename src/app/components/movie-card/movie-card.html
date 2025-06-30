@@ -6,9 +6,13 @@
     @for(movie of data.moviesSignal(); track movie.id) {
         <div class="row ms-2">
             <mat-card class="example-card mb-4" >
-                <img class="posterImg" mat-card-image [src]="data.imagesBaseURL+movie.poster_path" alt="Photo of {{movie.title}}">
+                <a [routerLink]="['/movie', movie.id]">
+                    <img class="posterImg" mat-card-image [src]="data.imagesBaseURL+movie.poster_path" alt="Photo of {{movie.title}}">
+                </a>
                 <mat-card-content class="text-start">
-                    <h6 class="mt-4">{{movie.title}}</h6>
+                    <a [routerLink]="['/movie', movie.id]" style="text-decoration: none; color: inherit;">
+                        <h6 class="mt-4">{{movie.title}}</h6>
+                    </a>
                     <p class="d-inline">{{movie.release_date | date: 'longDate'}}</p>
                     @if(isInWishlist(movie.id))
                     {
