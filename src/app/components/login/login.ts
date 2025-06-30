@@ -3,6 +3,7 @@ import { RouterLink,Router  } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service'; // Adjust path as needed
+
 @Component({
   selector: 'app-login',
   imports: [RouterLink,ReactiveFormsModule, CommonModule],
@@ -80,4 +81,21 @@ onSubmit() {
     }
   }
 
+   email = '';
+  password = '';
+
+  constructor(private router: Router) {}
+
+  login() {
+    // تحقق بسيط فقط
+    if (this.email && this.password) {
+      const username = this.email.split('@')[0];
+      localStorage.setItem('username', username);
+      this.router.navigate(['/']).then(() => {
+        window.location.reload(); // علشان الـ navbar يتحدث
+      });
+    } else {
+      alert('Please fill in email and password');
+    }
+  }
 }

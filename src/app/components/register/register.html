@@ -16,12 +16,12 @@
 
         <div class="card bg-glass">
           <div class="card-body px-4 py-5 px-md-5">
-
              <!-- Error Message -->
             <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
               {{ errorMessage }}
             </div>
             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
               <!-- 2 column grid layout with text inputs for the first and last names -->
               <div class="row">
                 <div class="col-md-6 mb-4">
@@ -33,6 +33,7 @@
                       formControlName="firstName"
                       [class.is-invalid]="firstName?.invalid && firstName?.touched"
                      />
+
                     <label class="form-label" for="form3Example1">First name</label>
                      <div *ngIf="firstName?.invalid && firstName?.touched" class="invalid-feedback">
                       <div *ngIf="firstName?.errors?.['required']">First name is required.</div>
@@ -49,6 +50,7 @@
                       formControlName="lastName"
                       [class.is-invalid]="lastName?.invalid && lastName?.touched"
                      />
+
                     <label class="form-label" for="form3Example2">Last name</label>
                     <div *ngIf="lastName?.invalid && lastName?.touched" class="invalid-feedback">
                       <div *ngIf="lastName?.errors?.['required']">Last name is required.</div>

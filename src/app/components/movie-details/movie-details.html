@@ -1,42 +1,34 @@
-<div class="details-container" *ngIf="movie">
-  <div class="movie-card">
-    <img [src]="movie.poster" [alt]="movie.title" class="movie-poster" />
-    <div class="movie-info">
-      <h1>{{ movie.title }}</h1>
-      <p class="release-date">{{ movie.releaseDate | date: 'MMM d, y' }}</p>
-
-      <div class="rating" *ngIf="movie.rating && movie.votes">
-        <span class="stars">{{ getStarRating(movie.rating) }}</span>
-        <span class="votes">{{ movie.votes | number }}</span>
-      </div>
-
-      <p class="description">{{ movie.description }}</p>
-
-      <div class="genres" *ngIf="movie.genres?.length">
-        <span class="genre" *ngFor="let genre of movie.genres">
-          {{ genre }}
-        </span>
-      </div>
-
-      <div class="details">
-        <p><strong>Duration:</strong> {{ movie.duration }} Min.</p>
-        <p><strong>Languages:</strong> {{ movie.languages?.join(', ') }}</p>
-      </div>
-
-      <p class="studio" *ngIf="movie.studio">{{ movie.studio }}</p>
-
-      <a *ngIf="movie.website" [href]="movie.website" target="_blank" class="website">Website</a>
-    </div>
+<div class="movie-details-container" *ngIf="movie">
+  <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{movie.title}}" class="movie-poster">
+  <div class="movie-info">
+    <h2>{{ movie?.title }}</h2>
+    <p><strong>Release Date:</strong> {{ movie?.release_date | date: 'longDate' }}</p>
+    <p><strong>Rating:</strong> {{ movie?.vote_average }}/10</p>
+    <p><strong>Overview:</strong> {{ movie?.overview }}</p>
   </div>
-
-  <div class="recommendations" *ngIf="recommendations?.length">
-    <h2>Recommendations</h2>
-    <div class="recommendation-list">
-      <div class="recommendation-card" *ngFor="let rec of recommendations">
-        <img [src]="rec.poster" [alt]="rec.title" />
-        <h3>{{ rec.title }}</h3>
-        <p class="rec-date">{{ rec.releaseDate | date: 'MMM d, y' }}</p>
-      </div>
-    </div>
+  <div *ngIf="trailerKey" class="trailer-container">
+  <h3>Official Trailer</h3>
+  <iframe width="100%" height="400"
+    [src]="'https://www.youtube.com/embed/' + trailerKey"
+    title="YouTube video player" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+</div>
+<div *ngIf="recommendedMovies.length > 0" class="recommended-section">
+  <h3 class="mt-4">Recommended Movies</h3>
+  <div class="card-container">
+    <mat-card *ngFor="let movie of recommendedMovies" class="example-card">
+      <a [routerLink]="['/movie', movie.id]">
+        <img class="posterImg" [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
+      </a>
+      <mat-card-content>
+        <h6>{{ movie.title }}</h6>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>
+
+
+

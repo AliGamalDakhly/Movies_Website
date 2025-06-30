@@ -7,6 +7,7 @@ import { AuthService } from '../../services/auth.service'; // Adjust path as nee
 @Component({
   selector: 'app-register',
   imports: [RouterLink,ReactiveFormsModule, CommonModule],
+
   templateUrl: './register.html',
   styleUrl: './register.css'
 })
