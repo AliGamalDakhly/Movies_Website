@@ -21,13 +21,13 @@ export class MovieCard implements OnInit {
   data = inject(Movies);
   
   ngOnInit() {
-    this.data.getMoviesByPage(1);
+    this.data.getMoviesByPage(1 ,this.data.language);
   }
 
   pageEvent(page:any){
     console.log(page);
     this.currrentPage = page.pageIndex + 1;
-    this.data.getMoviesByPage(this.currrentPage);
+    this.data.getMoviesByPage(this.currrentPage,this.data.language);
     this.totlaPages = page.length;
     this.displayedMovies = this.data.moviesSignal();
   }
