@@ -1,0 +1,48 @@
+ .rounded-t-5 {
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+    }
+
+    @media (min-width: 992px) {
+      .rounded-tr-lg-0 {
+        border-top-right-radius: 0;
+      }
+
+      .rounded-bl-lg-5 {
+        border-bottom-left-radius: 0.5rem;
+      }
+    }
+    h2 {
+        margin-bottom: 30px;
+        font-size: 26px;
+        font-weight: 600;
+      }
+.signup-text {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+ 
+}
+      .welcom{
+         display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+      }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        background: #FFE353;
+        color: black;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background 0.3s;
+
+        &:hover {
+          background: #FFE353;
+        }
+         
+           }

@@ -1,138 +1,93 @@
-.details-container {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  color: #333;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.movie-card {
+.movie-details-container {
   display: flex;
   gap: 30px;
-  margin-bottom: 40px;
+  padding: 40px;
+  background-color: #f4f4f4;
+  border-radius: 12px;
+  margin: 30px;
 }
 
 .movie-poster {
-  width: 250px;
-  height: auto;
-  border-radius: 8px;
+  width: 300px;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
 .movie-info {
-  flex: 1;
+  max-width: 600px;
 }
 
-.movie-info h1 {
-  margin: 0 0 10px 0;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.release-date {
-  color: #666;
-  font-size: 16px;
-  margin-bottom: 15px;
-}
-
-.rating {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.movie-info h2 {
   margin-bottom: 20px;
+  color: #032541;
 }
 
-.stars {
-  color: #FFD700;
-  font-size: 20px;
-  letter-spacing: 2px;
-}
-
-.votes {
-  color: #666;
-  font-size: 14px;
-}
-
-.description {
-  font-size: 16px;
-  line-height: 1.5;
-  margin-bottom: 20px;
-}
-
-.genres {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.genre {
-  background-color: #f0f0f0;
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 14px;
-}
-
-.details {
-  margin-bottom: 20px;
-}
-
-.details p {
-  margin: 5px 0;
-  font-size: 15px;
-}
-
-.studio {
-  font-weight: bold;
-  margin: 15px 0;
-  font-size: 16px;
-}
-
-.website {
-  display: inline-block;
-  color: #0066cc;
-  text-decoration: none;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-.recommendations {
-  margin-top: 40px;
-}
-
-.recommendations h2 {
-  font-size: 22px;
-  margin-bottom: 20px;
-}
-
-.recommendation-list {
-  display: flex;
-  gap: 25px;
-  overflow-x: auto;
-  padding-bottom: 20px;
-}
-
-.recommendation-card {
-  width: 150px;
-  flex-shrink: 0;
-}
-
-.recommendation-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 5px;
+.movie-info p {
+  font-size: 1rem;
+  color: #333;
   margin-bottom: 10px;
 }
+.trailer-container {
+  margin-top: 30px;
+  color: black;
+}
+.recommended-section {
+  margin-top: 40px;
+}
+.recommended-section h3 {
+  margin-left: 24px;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
 
-.recommendation-card h3 {
-  font-size: 16px;
-  margin: 5px 0;
-  white-space: nowrap;
+.posterImg {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;  
+}
+.example-card {
+  width: 160px;
+  min-height: 320px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.example-card:hover {
+  transform: translateY(-6px) scale(1.03);
+}
+mat-card-content {
+  padding: 10px;
+  text-align: center;
+}
+
+mat-card-content h6 {
+  font-size: 0.9rem;
+  color: #032541;
+  margin: 8px 0 0;
+  line-height: 1.2;
+  max-height: 2.4em;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.add-to-favourite {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
 
-.rec-date {
-  color: #666;
-  font-size: 14px;
-  margin: 0;
+.add-to-favourite:hover {
+  color: #ff4081;
 }

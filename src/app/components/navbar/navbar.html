@@ -1,4 +1,6 @@
-@if(language == "en"){
+
+              
+<!-- @if(language == "en"){
 <nav class="navbar-container navbar navbar-expand-lg bg-light px-4 py-2">
   <a class="navbar-brand app-title" routerLink="/">
   <span class="icon">🎬</span><span class="text">MovieApp</span>
@@ -10,12 +12,13 @@
         <a class="nav-link" routerLink="/">Home</a>
       </li>
       <li class="nav-item">
+
         <a class="nav-link" routerLink="/wishlist">Wishlist</a>
       </li>
     </ul>
 
     <div class="d-flex align-items-center gap-3">
-      <!-- Dropdown لغة -->
+
       
       <select class="form-select form-select-sm"  [(ngModel)]="language" (ngModelChange)="onChange()">
         @for(lang of languages; track lang) {
@@ -23,13 +26,92 @@
         }
       </select>
 
-      <!-- Dark mode -->
       <button class="btn btn-outline-light btn-sm">🌙</button>
 
-      <!-- Login / Username -->
+
       <span class="text-white" ></span>
-      <a class="btn btn-outline-light btn-sm" routerLink="/login">Login</a>
+      <a class="btn btn-outline-light btn-sm" routerLink="/login">Login</a> -->
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 py-5" [attr.dir]="language === 'ar' ? 'rtl' : 'ltr'">
+  <div class="container-fluid">
+
+   
+    <div class="d-flex align-items-center gap-4 align-items-center">
+      <a class="navbar-brand app-title" routerLink="/">
+        <span class="icon">🎬</span><span class="text">MovieApp</span>
+      </a>
+
+      <ul class="navbar-nav d-flex flex-row gap-3 mb-0">
+        <li class="nav-item">
+          <a class="nav-link fw-bold" routerLink="/">{{ language === 'ar' ? 'الرئيسية' : 'Home' }}</a>
+          <!-- <span class="badge bg-warning text-dark ms-1">{{ wishlistCount }}</span> -->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold" routerLink="/wishlist">{{ language === 'ar' ? 'المفضلة' : 'Wishlist' }}</a>
+        </li>
+      </ul>
     </div>
+
+  
+    <button class="navbar-toggler" type="button" (click)="menuOpen = !menuOpen">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+   
+    <div class="collapse navbar-collapse justify-content-end mt-3 mt-lg-0 d-none d-lg-flex">
+      <div class="d-flex flex-row align-items-center gap-2">
+
+      
+        <select class="form-select form-select-sm w-auto btn-nav custom-lang-select" [(ngModel)]="language" (change)="changeLanguage()">
+          <option value="en">en</option>
+          <option value="ar">ar</option>
+        </select>
+
+       
+        <button class="btn btn-nav btn-sm w-auto" (click)="toggleDarkMode()">🌙</button>
+
+       
+        <ng-container *ngIf="username && username.trim().length > 0; else loginBtn">
+          <span class="text-white"> {{ language === 'ar' ? 'مرحبًا،' : 'Hi,' }} {{ username }}</span>
+          <button class="btn btn-nav btn-sm w-auto" (click)="logout()"> {{ language === 'ar' ? 'تسجيل الخروج' : 'Logout' }}</button>
+        </ng-container>
+
+        <ng-template #loginBtn>
+          <a routerLink="/login" class="btn btn-nav btn-sm w-auto">{{ language === 'ar' ? 'تسجيل الدخول' : 'Login' }}</a>
+        </ng-template>
+
+      </div>
+    </div>
+
+    <div
+      *ngIf="menuOpen"
+      class="dropdown-menu-custom d-lg-none mt-2 shadow rounded bg-dark p-3"
+      [ngStyle]="language === 'ar' ? { left: '15px', right: 'auto' } : { right: '15px', left: 'auto' }">
+
+      <hr class="bg-secondary">
+
+  
+      <select class="form-select form-select-sm btn-nav mb-2 custom-lang-select"  [(ngModel)]="language" (change)="changeLanguage()">
+        <option value="en">
+          en</option>
+        <option value="ar">ar</option>
+      </select>
+
+     
+      <button class="btn btn-nav btn-sm mb-2 w-100" (click)="toggleDarkMode()">🌙</button>
+
+     
+      <ng-container *ngIf="username && username.trim().length > 0; else mobileLogin">
+        <span class="text-white"> {{ language === 'ar' ? 'مرحبًا،' : 'Hi,' }} {{ username }}</span>
+        <button class="btn btn-nav btn-sm mt-2 w-100" (click)="logout()"> {{ language === 'ar' ? 'تسجيل الخروج' : 'Logout' }}</button>
+      </ng-container>
+
+      <ng-template #mobileLogin>
+        <a routerLink="/login" class="btn btn-nav btn-sm w-100">{{ language === 'ar' ? 'تسجيل الدخول' : 'Login' }}</a>
+      </ng-template>
+    </div>
+
   </div>
 </nav>
 } @else if(language == "ar") {

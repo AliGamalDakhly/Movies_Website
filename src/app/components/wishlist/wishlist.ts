@@ -1,57 +1,38 @@
-import { Component } from '@angular/core';
-import { Imovie } from '../../interfaces/imovie';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MovieItem } from '../../Models/movie-item';
+import { Firebase } from '../../services/firebase';
+import { Movies } from '../../services/movies';
+import { User } from '../../Models/user';
+import { RouterLink } from '@angular/router';
 
 type StarType = 'full' | 'half' | 'empty';
 
 @Component({
   selector: 'app-wishlist',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './wishlist.html',
   styleUrl: './wishlist.css'
 })
 export class Wishlist {
 
-   wishlist: Imovie[] = [
+  tempwish: MovieItem[] = [];
+  currentUser: User| null = null;
+  loading: boolean = true;
+
+  constructor(private firebaseService: Firebase,private movieService: Movies)
   {
-    id : 1,
-    adult: true,
-    title: 'Movie',
-    genre_ids: [1,2],
-    original_language: 'en',
-    original_title: 'movie',
-    overview: 'dfbvdf brberdg gtrh ',
-    poster_path: 'https://image.tmdb.org/t/p/w500/6WxhEvFsauuACfv8HyoVX6mZKFj.jpg',
-    release_date: '15/5/199',
-    vote_average: 3.5
-      },
-    {
-    id : 3,
-    adult: true,
-    title: 'Movie',
-    genre_ids: [1,2],
-    original_language: 'en',
-    original_title: 'movie',
-    overview: 'dfbvdf brberdg gtrh ',
-    poster_path: 'https://image.tmdb.org/t/p/w500/7c5VBuCbjZOk7lSfj9sMpmDIaKX.jpg',
-    release_date: '15/5/199',
-    vote_average: 3.5
-      },
-    {
-    id : 2,
-    adult: true,
-    title: 'Movie',
-    genre_ids: [1,2],
-    original_language: 'en',
-    original_title: 'movie',
-    overview: 'dfbvdf brberdg gtrh ',
-    poster_path: 'https://image.tmdb.org/t/p/w500/q5pXRYTycaeW6dEgsCrd4mYPmxM.jpg',
-    release_date: '15/5/199',
-    vote_average: 3.5
-      }
-    ];
 
-
+  }
+    
+  async ngOnInit() 
+  {
+      this.loading = true;
+      await this.firebaseService.Init(); 
+      this.tempwish = this.firebaseService.wishlist;
+      this.currentUser = this.firebaseService.currentUser;
+      this.loading = false;
+  }
     
 
   getStarsFromRating(rating: number): StarType[] 
@@ -70,24 +51,20 @@ export class Wishlist {
     }
 
     return stars;
-}
+  }
 
-removeFromWishlist(movieId: number)
-{
-  this.wishlist = this.wishlist.filter(movie => {
-    return movie.id != movieId;
-  })
-}
+  removeFromWishlist(movieId: number)
+  {
+    this.tempwish = this.tempwish.filter(movie => {
+      return movie.id != movieId;
+    })
 
-  // we have to get the logged user
-  // then we get movies he added to wishlist (from movie service , filter the movies)
-  // then we display them in the page
+    if(this.currentUser != null)
+    {
+      this.firebaseService.removeFromWishlist(this.currentUser.id, movieId);
+    }
+      
+  }
 
-  // foreach(let id in user.wishlist){
-  //   let movie: Imovie =  Movies.find(id);
-  //   wishlist.push(movie);
-  // }
-
-  
 
 }

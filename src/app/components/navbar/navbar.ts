@@ -1,18 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Movies } from '../../services/movies';
+import { Language } from '../../services/language';
+
+
 
 @Component({
   selector: 'app-navbar',
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule,TranslateModule,RouterLink],
+
   templateUrl: './navbar.html',
-  styleUrl: './navbar.css'
+  styleUrls: ['./navbar.css']
 })
 export class Navbar{
 
-  language = 'en';
+   language = 'en';
   languages = ['en', 'ar', 'fr', 'zh'];
   isDarkMode = false;
   movieByLanguage = inject(Movies);
@@ -21,58 +26,60 @@ export class Navbar{
     console.log(`Language changed to: ${this.language}`);
     this.movieByLanguage.getMoviesByPage(this.movieByLanguage.pageNumber,this.language);
   }
+  username: string | null = null;
+  menuOpen = false;
+  isDarkMode = false;
+  movieByLanguage = inject(Movies);
+
+  
+  constructor(private languageService: Language) {}
+
+  onChange(){
+    console.log(`Language changed to: ${this.language}`);
+    this.movieByLanguage.getMoviesByPage(this.movieByLanguage.pageNumber,this.language);
+  }
+
+
+  ngOnInit(): void {
+
+    this.username = localStorage.getItem('username');
+
+    this.language = this.languageService.currentLanguage;
+    
+
+    const savedLang = localStorage.getItem('lang');
+    if (savedLang) {
+      this.language = savedLang;
+      this.applyDirection(savedLang);
+    }
 
   
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // username: string | null = null;
-
-  // ngOnInit(): void {
-  //   console.log(this.language);
     
-  //   }
+    //this.wishlistCount = this.firebaseService.wishlist.length;
+
   
-  //   const savedTheme = localStorage.getItem('theme');
-  //   if (savedTheme === 'dark') {
-  //     document.body.classList.add('dark-mode');
-  //   }
 
-  //   this.username = localStorage.getItem('username');
-  // }
+   changeLanguage() {
+    this.languageService.setLanguage(this.language);
+  }
 
-  // changeLanguage() {
-  //   localStorage.setItem('lang', this.language);
-  //   this.applyDirection(this.language);
-  // }
 
-  // applyDirection(lang: string) {
-  //   const direction = lang === 'ar' ? 'rtl' : 'ltr';
-  //   document.body.setAttribute('dir', direction);
-  // }
 
-  // toggleDarkMode() {
-  //   const isDark = document.body.classList.toggle('dark-mode');
-  //   localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  // }
+  toggleDarkMode() {
+    const isDark = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('theme', isDark ? 'light': 'dark' );
+  }
 
-  // logout() {
-  //   localStorage.removeItem('username');
-  //   this.username = null;
-  // }
+  
+  logout() {
+    localStorage.removeItem('username');
+    this.username = null;
+    window.location.href = '/'; 
+  }
+
+ 
+}
+
+
