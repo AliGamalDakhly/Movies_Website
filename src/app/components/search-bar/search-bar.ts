@@ -17,7 +17,7 @@ export class SearchBar{
  SearchedMovies: MovieItem[] = [];
 
   ngOnInit() {
-    this.Allmovies.getMoviesByPage(1);
+    this.Allmovies.getMoviesByPage(1,this.Allmovies.language);
   }
 
   movieSearch() {
@@ -27,7 +27,7 @@ export class SearchBar{
 
   Reset(){
       this.searchText = ''
-      this.Allmovies.getMoviesByPage(1);
+      this.Allmovies.getMoviesByPage(1,this.Allmovies.language);
       this.SearchedMovies = this.Allmovies.moviesSignal();
       return;
   }

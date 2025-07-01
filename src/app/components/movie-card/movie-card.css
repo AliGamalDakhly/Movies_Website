@@ -153,49 +153,48 @@ p {
 
 
 /* --------------  PAGINATOR STYLES -------------- */
-  ::ng-deep .custom-paginator {
-    background: #032541;           
-    border-radius: 5px;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    color: #ffffff;               
-    font-weight: 500;
-    margin-top: 24px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  }
-  
-  ::ng-deep .custom-paginator .mat-mdc-icon-button {
-    background-color: #01b4e4;     
-    color: #ffffff;
-    border-radius: 50%;
-    margin: 0 4px;
-    transition: all 0.3s ease;
-  }
-  
-  ::ng-deep .custom-paginator .mat-mdc-icon-button:hover {
-    background-color: #90cea1;     
-    transform: scale(1.1);
-  }
-  
-  ::ng-deep .custom-paginator .mat-mdc-button-disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-  }
-  
-  ::ng-deep .custom-paginator .mat-mdc-select {
-    color: #ffffff;
-    background: #01b4e4;
-    border-radius: 4px;
-  }
-  
-  ::ng-deep .custom-paginator .mat-mdc-select-trigger {
-    color: white;
-  }
-  
-  ::ng-deep .custom-paginator .mat-mdc-paginator-range-label {
-    display: none;
-  }
-  
+  /* الحاوية التي توسّط الـpaginator */
+.paginator-wrapper {
+  display: flex;
+  justify-content: center;   /* يضع الطفل في المنتصف */
+  margin-top: 24px;
+}
+
+/* حاوية الـpaginator نفسه */
+::ng-deep .custom-paginator {
+  background: #f8f9fa;       /* خلفية فاتحة موحّدة */
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  padding: 8px 20px;
+  color: #212529;            /* نص داكن */
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0,0,0,.15);
+  width: fit-content;        /* يتقلص حول أزراره */
+}
+
+/* أزرار التبديل */
+::ng-deep .custom-paginator .mat-mdc-icon-button {
+  background-color: #0d6efd; /* Primary أزرق فاتح ثابت */
+  color: #fff;
+  border-radius: 50%;
+  margin: 0 4px;
+  transition: transform .2s ease;  /* فقط التصغير/التكبير */
+}
+
+/* ألغِ تغيّر الخلفية عند الـhover */
+::ng-deep .custom-paginator .mat-mdc-icon-button:hover {
+  background-color: #0d6efd; /* نفس اللون (لا يتغيّر) */
+  transform: scale(1.1);
+}
+
+/* زر مُعطَّل */
+::ng-deep .custom-paginator .mat-mdc-button-disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+/* أخفِ نطاق الصفحات إن كنت لا تحتاجه */
+::ng-deep .custom-paginator .mat-mdc-paginator-range-label {
+  display: none;
+}
+

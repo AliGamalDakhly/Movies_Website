@@ -1,3 +1,4 @@
+@if(Allmovies.language === 'en') {
 <div class="container">
     <h1>Welcome To Our Movie App</h1>
     <p>Millions of Movies, TV shows and people to discover.Explore Now.</p>
@@ -9,4 +10,19 @@
       </div>
       <button class="btn btn-outline-danger search-btn" type="button" (click)="Reset()">Reset</button>
 </div>
+}@else if(Allmovies.language === 'ar') {
+  <div class="container">
+    <h1>مرحبا بكم في موقع الافلام</h1>
+    <p>ملايين الأفلام والبرامج التلفزيونية والأشخاص الذين يمكنك اكتشافهم.استكشف الآن.</p>
+    <div class="input-group mb-3">
+        <input [(ngModel)]="searchText" type="text" class="form-control" placeholder="Search and explore..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-outline-success search-btn" type="button" (click)="movieSearch()">بحث</button>
+        </div>
+      </div>
+      <button class="btn btn-outline-danger search-btn" type="button" (click)="Reset()">اعادة ضبط</button>
+</div>
+
+
+}
 
