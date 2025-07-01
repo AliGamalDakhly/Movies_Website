@@ -29,9 +29,11 @@
 </div>
 
 <!-- Pagination -->
+ <div class="paginator-wrapper">
 <mat-paginator class="custom-paginator" [length]="250"
                 [pageSize]="1"
                 [hidePageSize]="true"
                 [showFirstLastButtons]="true"
                 (page)="pageEvent($event)"
 ></mat-paginator>
+</div>

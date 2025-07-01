@@ -1,38 +1,79 @@
+/* ========  NAVBAR – LIGHT MODE  ======== */
 
+/* حاوية الـNavbar */
+.navbar-container {
+  background-color: #f8f9fa;  /* رمادي فاتح لطيف */
+  border-bottom: 1px solid #dee2e6;
+  padding: 12px 24px;
+}
+
+/* عنوان التطبيق */
 .app-title {
-  font-size: 45px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  text-decoration: none;
-  transition: transform 0.3s ease;
+
+  background-color: transparent;
+  font-size: 28px;
+  font-weight: 700;
+  color: #0d6efd;            /* أزرق Bootstrap */
+
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-}
-.app-title .icon {
-  color: white;
-  font-size: 35px;
-}
-.app-title .text {
-  background: linear-gradient(90deg, #ffd700, #ff9900, #ffd700);
-  background-size: 200%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 3s linear infinite;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-.app-title:hover {
-  transform: scale(1.08);
+  gap: 8px;
+  text-decoration: none;
+  transition: transform 0.3s ease;
 }
 
-@keyframes shine {
-  0% {
-    background-position: 0% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
+.app-title:hover {
+  transform: scale(1.05);
+}
+
+/* أيقونة 🎬 */
+.app-title .icon {
+
+  font-size: 26px;
+  color: #198754;            /* أخضر Bootstrap */
+}
+
+/* نص MovieApp */
+.app-title .text {
+  color: #0d6efd;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* روابط الـNavbar */
+.navbar .nav-link {
+  color: #212529;            /* أسود‑رمادي داكن */
+  font-weight: 500;
+  font-size: 16px;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.navbar .nav-link:hover {
+  color: #0d6efd;            /* أزرق عند المرور */
+}
+
+/* قائمة اختيار اللغة */
+.form-select-sm {
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* زر تسجيل الدخول */
+.btn-outline-light {
+  color: #0d6efd;
+  border-color: #0d6efd;
+  font-size: 14px;
+}
+
+.btn-outline-light:hover {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+/* دعم نص من اليمين لليسار (عند الحاجة) */
+.right-to-left {
+  direction: rtl;
+
 }
 
 

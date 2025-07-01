@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { Movies } from '../../services/movies';
 import { Language } from '../../services/language';
 
 
@@ -10,17 +11,34 @@ import { Language } from '../../services/language';
 @Component({
   selector: 'app-navbar',
   imports: [FormsModule,CommonModule,TranslateModule,RouterLink],
+
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.css']
 })
-export class Navbar implements OnInit {
+export class Navbar{
 
    language = 'en';
   languages = ['en', 'ar', 'fr', 'zh'];
+  isDarkMode = false;
+  movieByLanguage = inject(Movies);
+
+  onChange(){
+    console.log(`Language changed to: ${this.language}`);
+    this.movieByLanguage.getMoviesByPage(this.movieByLanguage.pageNumber,this.language);
+  }
   username: string | null = null;
   menuOpen = false;
+  isDarkMode = false;
+  movieByLanguage = inject(Movies);
+
   
   constructor(private languageService: Language) {}
+
+  onChange(){
+    console.log(`Language changed to: ${this.language}`);
+    this.movieByLanguage.getMoviesByPage(this.movieByLanguage.pageNumber,this.language);
+  }
+
 
   ngOnInit(): void {
 
@@ -40,19 +58,17 @@ export class Navbar implements OnInit {
       document.body.classList.add('dark-mode');
     }
 
+
     
     //this.wishlistCount = this.firebaseService.wishlist.length;
 
-    }
+  
 
    changeLanguage() {
     this.languageService.setLanguage(this.language);
   }
 
-  applyDirection(lang: string) {
-    const direction = lang === 'ar' ? 'rtl' : 'ltr';
-    document.body.setAttribute('dir', direction);
-  }
+
 
   toggleDarkMode() {
     const isDark = document.body.classList.toggle('dark-mode');
@@ -68,16 +84,5 @@ export class Navbar implements OnInit {
 
  
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
