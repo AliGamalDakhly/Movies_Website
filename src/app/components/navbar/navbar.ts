@@ -43,8 +43,6 @@ applyDirection(lang: string) {
   
 
   ngOnInit(): void {
-    sessionStorage
-    this.username = sessionStorage.getItem('username');
 
     this.language = this.languageService.currentLanguage;
     
