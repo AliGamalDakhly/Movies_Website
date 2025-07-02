@@ -82,7 +82,7 @@ applyDirection(lang: string) {
 
   
   logout() {
-    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('userEmail');
     this.username = null;
     window.location.href = '/'; 
   }

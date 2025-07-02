@@ -11,8 +11,8 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/">Home</a>
       </li>
+      <span class="badge bg-warning text-dark ms-1">{{ firebaseService.wishlist.length }}</span>
       <li class="nav-item">
-
         <a class="nav-link" routerLink="/wishlist">Wishlist</a>
       </li>
     </ul>
@@ -29,8 +29,15 @@
       <button class="btn btn-outline-light btn-sm">🌙</button>
 
 
-      <span class="text-white" ></span>
-      <a class="btn btn-outline-light btn-sm" routerLink="/login">Login</a>
+      <span class="text-white" >{{firebaseService.currentUser?.FirstName}}</span>
+      @if(firebaseService.currentUser)
+      {
+        <a class="btn btn-outline-light btn-sm" routerLink="/login" (click)="logout()">Logout</a>
+      }
+      @else 
+      {
+        <a class="btn btn-outline-light btn-sm" routerLink="/login">Login</a>
+      }    
     </div>
   </div>
 </nav>
@@ -146,10 +153,16 @@
   
 
         <button class="btn btn-outline-light btn-sm">🌙</button>
-  
-  
-        <span class="text-white" ></span>
-        <a class="btn btn-outline-light btn-sm" routerLink="/login">تسجيل</a>
+
+        <span class="text-white" >{{firebaseService.currentUser?.FirstName}}</span>
+        @if(firebaseService.currentUser)
+        {
+          <a class="btn btn-outline-light btn-sm" routerLink="/login" (click)="logout()">تسجيل خروج</a>
+        }
+        @else 
+        {
+          <a class="btn btn-outline-light btn-sm" routerLink="/login"> تسجيل دخول</a>
+        }    
       </div>
     </div>
   </nav>
