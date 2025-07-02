@@ -10,6 +10,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Firebase } from '../../services/firebase';
 import { User } from '../../Models/user';
 import { firstValueFrom } from 'rxjs';
+import { Language } from '../../services/language';
 
 
 @Component({
@@ -30,15 +31,25 @@ export class MovieDetails implements OnInit {
   constructor(private route: ActivatedRoute,
               private movieService: Movies,
               private sanitizer: DomSanitizer,
+              private languageService: Language,
               private firebaseService: Firebase) {}
 
   ngOnInit(): void {
     const movieId = +this.route.snapshot.paramMap.get('id')!;
 
+
+
     // Get movie details
-    this.movieService.getMovieById(movieId).subscribe(movie => {
+    
+
+     this.languageService.language$.subscribe((newLang) => {
+    this.movieService.getMovieById(movieId, newLang).subscribe(movie => {
       this.movie = movie;
     });
+    this.movieService.getRecommendedMovies(movieId, newLang ).subscribe(res => {
+        this.recommendedMovies = res.results;
+    });
+  });
 
     // Get videos and extract trailer
     this.movieService.getMovieVideos(movieId).subscribe(res => {
@@ -49,9 +60,7 @@ export class MovieDetails implements OnInit {
         this.trailerKey = trailer.key;
       }
     });
-    this.movieService.getRecommendedMovies(movieId).subscribe(res => {
-        this.recommendedMovies = res.results;
-    });
+    
     this.firebaseService.Init().then(() => {
       this.currentUser = this.firebaseService.currentUser;
 });
@@ -60,6 +69,8 @@ export class MovieDetails implements OnInit {
   isInWishlist(movieId: number): boolean {
   return this.firebaseService.wishlist.some(movie => movie.id === movieId);
 }
+
+
 
 async toggleWishlist(movieId: number) {
   if (!this.currentUser) return;
@@ -71,7 +82,7 @@ async toggleWishlist(movieId: number) {
     this.firebaseService.wishlist = this.firebaseService.wishlist.filter(m => m.id !== movieId);
   } else {
     try {
-      const movie = await firstValueFrom(this.movieService.getMovieById(movieId));
+      const movie = await firstValueFrom(this.movieService.getMovieById(movieId, this.movieService.language));
       this.firebaseService.addToWishlist(this.currentUser.id, movieId);
       this.firebaseService.wishlist.push(movie);
     } catch (err) {

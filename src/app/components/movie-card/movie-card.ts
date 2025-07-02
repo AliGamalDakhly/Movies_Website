@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { Movies } from '../../services/movies';
 import { CommonModule } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
@@ -65,7 +65,7 @@ export class MovieCard implements OnInit {
         let movie: MovieItem | null = null;
         try 
         {
-          movie = await firstValueFrom(this.data.getMovieById(movieId));
+          movie = await firstValueFrom(this.data.getMovieById(movieId, this.data.language));
           this.firebaseService.wishlist.push(movie);
         } 
         catch (error) {
@@ -83,4 +83,15 @@ export class MovieCard implements OnInit {
 
   /* End Of Added Code */
 
+
+  showButton = false;
+
+  @HostListener('window:scroll', [])
+  onScroll() {
+    this.showButton = window.pageYOffset > 300;
+  }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }

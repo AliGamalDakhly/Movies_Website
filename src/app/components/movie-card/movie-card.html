@@ -27,7 +27,9 @@
         </div>
     }
 </div>
-
+<button class="back-to-top" (click)="scrollToTop()" [class.show]="showButton">
+  ⬆ Back to Top
+</button>
 <!-- Pagination -->
  <div class="paginator-wrapper">
 <mat-paginator class="custom-paginator" [length]="250"
