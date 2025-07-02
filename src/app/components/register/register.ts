@@ -69,7 +69,7 @@ export class Register {
         this.isLoading = true;
         this.errorMessage = '';
   
-        const { firstName, lastName, email, password } = this.registerForm.value;
+        const { firstName, lastName, email, password} = this.registerForm.value;
   
         this.authService.register(email, password, firstName, lastName).subscribe({
           next: (userCredential) => {
@@ -77,6 +77,7 @@ export class Register {
             this.isLoading = false;
             // Redirect to dashboard or login page
             this.router.navigate(['/moviecard']); // Change route as needed
+            sessionStorage.setItem("userEmail", email);
           },
           error: (error) => {
             console.error('Registration error:', error);
