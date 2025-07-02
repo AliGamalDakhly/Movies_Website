@@ -37,11 +37,6 @@ export class MovieDetails implements OnInit {
   ngOnInit(): void {
     const movieId = +this.route.snapshot.paramMap.get('id')!;
 
-
-
-    // Get movie details
-    
-
      this.languageService.language$.subscribe((newLang) => {
     this.movieService.getMovieById(movieId, newLang).subscribe(movie => {
       this.movie = movie;
@@ -51,24 +46,27 @@ export class MovieDetails implements OnInit {
     });
   });
 
-    // Get videos and extract trailer
-    this.movieService.getMovieVideos(movieId).subscribe(res => {
-      const trailer = res.results.find(
-        (video: any) => video.type === 'Trailer' && video.site === 'YouTube'
-      );
-      if (trailer) {
-        this.trailerKey = trailer.key;
-      }
-    });
+  
+     this.movieService.getMovieVideos(movieId).subscribe(res => {
+    const trailer = res.results.find(
+      (video: any) => video.type === 'Trailer' && video.site === 'YouTube'
+    );
+    if (trailer) {
+      this.trailerKey = trailer.key;
+      const url = `https://www.youtube.com/embed/${this.trailerKey}`;
+      this.trailerUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url); // ✅ secure YouTube URL
+    }
+  });
     
     this.firebaseService.Init().then(() => {
       this.currentUser = this.firebaseService.currentUser;
 });
 
   }
+
   isInWishlist(movieId: number): boolean {
   return this.firebaseService.wishlist.some(movie => movie.id === movieId);
-}
+  }
 
 
 
