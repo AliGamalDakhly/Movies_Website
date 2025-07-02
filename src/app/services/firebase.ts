@@ -4,6 +4,7 @@ import { firstValueFrom, Observable } from 'rxjs';
 import { User } from '../Models/user';
 import { MovieItem } from '../Models/movie-item';
 import { Movies } from './movies';
+import { Language } from './language';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class Firebase {
   currentUser : User | null = null; 
   wishlist: MovieItem[] =[];
 
-  constructor(private firestore: Firestore , private movieService: Movies ) 
+  constructor(private firestore: Firestore , private movieService: Movies, private langService: Language ) 
   {}
 
 
@@ -30,7 +31,7 @@ export class Firebase {
         for(let movieId of this.currentUser.Wishlist)
         {
           try {
-            const movie = await firstValueFrom(this.movieService.getMovieById(movieId));
+            const movie = await firstValueFrom(this.movieService.getMovieById(movieId, this.langService.currentLanguage));
             movie.poster_path = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
             this.wishlist.push(movie);
           } catch (error) {

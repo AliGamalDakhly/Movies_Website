@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Movies } from '../../services/movies';
 import { Language } from '../../services/language';
+import { Firebase } from '../../services/firebase';
 
 
 
@@ -17,39 +18,42 @@ import { Language } from '../../services/language';
 })
 export class Navbar{
 
-   language = 'en';
+  constructor(private languageService: Language ) {}
+  
+  language = 'en';
   languages = ['en', 'ar', 'fr', 'zh'];
   isDarkMode = false;
   movieByLanguage = inject(Movies);
+  firebaseService = inject(Firebase);
 
   onChange(){
+    this.languageService.setLanguage(this.language);
     console.log(`Language changed to: ${this.language}`);
     this.movieByLanguage.getMoviesByPage(this.movieByLanguage.pageNumber,this.language);
+    document.body.removeAttribute('dir');
   }
   username: string | null = null;
   menuOpen = false;
-  isDarkMode = false;
-  movieByLanguage = inject(Movies);
 
   
-  constructor(private languageService: Language) {}
-
-  onChange(){
-    console.log(`Language changed to: ${this.language}`);
-    this.movieByLanguage.getMoviesByPage(this.movieByLanguage.pageNumber,this.language);
-  }
-
+applyDirection(lang: string) {
+    const direction = lang === 'ar' ? 'rtl' : 'ltr';
+    document.body.setAttribute('dir', direction);
+  }
+  
 
   ngOnInit(): void {
-
+    sessionStorage
     this.username = sessionStorage.getItem('username');
 
     this.language = this.languageService.currentLanguage;
     
 
     const savedLang = sessionStorage.getItem('lang');
+  
     if (savedLang) {
       this.language = savedLang;
+      this.movieByLanguage.language = savedLang;
       this.applyDirection(savedLang);
     }
 
@@ -58,13 +62,14 @@ export class Navbar{
       document.body.classList.add('dark-mode');
     }
 
-
+}
     
     //this.wishlistCount = this.firebaseService.wishlist.length;
 
   
 
    changeLanguage() {
+    sessionStorage.setItem("lang", JSON.stringify(this.movieByLanguage.language) )
     this.languageService.setLanguage(this.language);
   }
 
@@ -83,6 +88,6 @@ export class Navbar{
   }
 
  
+
+
 }
-
-

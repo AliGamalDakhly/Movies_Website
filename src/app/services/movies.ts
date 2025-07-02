@@ -52,8 +52,8 @@ constructor(private http: HttpClient) {}
   }
 
   /* Added By: Ali Gamal */
-  getMovieById(Id: number): Observable<MovieItem> {
-  const url = `https://api.themoviedb.org/3/movie/${Id}?api_key=${environment.movieApiKey}`;
+  getMovieById(Id: number, language: string): Observable<MovieItem> {
+  const url = `https://api.themoviedb.org/3/movie/${Id}?api_key=${environment.movieApiKey}&language=${language}`;
   return this.HttpFetchData.get<MovieItem>(url);
   }
   /* End Of Code*/
@@ -61,9 +61,9 @@ constructor(private http: HttpClient) {}
 getMovieVideos(movieId: number) {
   return this.http.get<any>(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${environment.movieApiKey}`);
 }
-getRecommendedMovies(movieId: number) {
+getRecommendedMovies(movieId: number, language: string) {
   return this.http.get<any>(
-    `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${environment.movieApiKey}`
+    `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${environment.movieApiKey}&language=${language}`
   );
 }
 
