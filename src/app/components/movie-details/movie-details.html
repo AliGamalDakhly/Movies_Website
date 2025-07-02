@@ -1,4 +1,4 @@
-<div class="movie-details-container" *ngIf="movie && currentUser">
+<div class="movie-details-container" *ngIf="movie">
   <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{movie.title}}" class="movie-poster">
   <div class="movie-info">
     <h2>{{ movie?.title }}</h2>
