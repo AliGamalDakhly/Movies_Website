@@ -1,7 +1,7 @@
 export interface User {
     id: string;
-    UserName: string;
+    FirstName: string;
+    LastName: string;
     Email: string;
-    Password: string;
     Wishlist: number[];
 }
