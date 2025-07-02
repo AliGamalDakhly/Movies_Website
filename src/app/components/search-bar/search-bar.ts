@@ -17,6 +17,7 @@ export class SearchBar{
  SearchedMovies: MovieItem[] = [];
 
   ngOnInit() {
+    document.body.removeAttribute('dir');
     this.Allmovies.getMoviesByPage(1,this.Allmovies.language);
   }
 

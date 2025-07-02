@@ -70,11 +70,6 @@
   color: #fff;
 }
 
-/* دعم نص من اليمين لليسار (عند الحاجة) */
-.right-to-left {
-  direction: rtl;
-
-}
 
 
 .btn-nav {
@@ -147,8 +142,4 @@ body.dark-mode .btn-nav {
 }
 
 
-[dir="rtl"] .dropdown-menu-custom {
-  right: auto;
-  left: 0;
-}
 
