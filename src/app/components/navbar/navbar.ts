@@ -21,7 +21,7 @@ export class Navbar{
   constructor(private languageService: Language ) {}
   
   language = 'en';
-  languages = ['en', 'ar', 'fr', 'zh'];
+  languages = ['en', 'ar'];
   isDarkMode = false;
   movieByLanguage = inject(Movies);
   firebaseService = inject(Firebase);
