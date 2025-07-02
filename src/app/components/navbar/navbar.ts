@@ -56,7 +56,9 @@ applyDirection(lang: string) {
     }
 
     const savedTheme = sessionStorage.getItem('theme');
-    if (savedTheme === 'dark') {
+    this.isDarkMode = savedTheme === 'dark';
+
+    if (this.isDarkMode) {
       document.body.classList.add('dark-mode');
     }
 
@@ -74,8 +76,15 @@ applyDirection(lang: string) {
 
 
   toggleDarkMode() {
-    const isDark = document.body.classList.toggle('dark-mode');
-    sessionStorage.setItem('theme', isDark ? 'light': 'dark' );
+    this.isDarkMode = !this.isDarkMode;
+
+    if (this.isDarkMode) {
+      document.body.classList.add('dark-mode');
+      sessionStorage.setItem('theme', 'dark');
+    } else {
+      document.body.classList.remove('dark-mode');
+      sessionStorage.setItem('theme', 'light');
+    }
   }
 
   

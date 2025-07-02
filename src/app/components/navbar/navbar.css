@@ -1,24 +1,15 @@
-/* ========  NAVBAR – LIGHT MODE  ======== */
-
-/* حاوية الـNavbar */
+/* ===== NAVBAR CONTAINER ===== */
 .navbar-container {
-  background-color: #f8f9fa;  /* رمادي فاتح لطيف */
-  border-bottom: 1px solid #dee2e6;
-  padding: 12px 24px;
+  padding: 6px 24px;
+  background-color: #f8f9fa;
 }
 
-/* عنوان التطبيق */
+/* ===== APP TITLE ===== */
 .app-title {
-
-  background-color: transparent;
-  font-size: 28px;
-  font-weight: 700;
-  color: #0d6efd;            /* أزرق Bootstrap */
-
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  font-size: 24px;
+  font-weight: bold;
   text-decoration: none;
+  color: #0d6efd;
   transition: transform 0.3s ease;
 }
 
@@ -26,120 +17,182 @@
   transform: scale(1.05);
 }
 
-/* أيقونة 🎬 */
-.app-title .icon {
-
-  font-size: 26px;
-  color: #198754;            /* أخضر Bootstrap */
-}
-
-/* نص MovieApp */
 .app-title .text {
-  color: #0d6efd;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-/* روابط الـNavbar */
+/* ===== MOVIE LOGO ===== */
+.movie-logo-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.15));
+}
+
+/* ===== NAV LINKS ===== */
 .navbar .nav-link {
-  color: #212529;            /* أسود‑رمادي داكن */
-  font-weight: 500;
+  color: #212529;
   font-size: 16px;
-  transition: color 0.2s ease;
-  cursor: pointer;
+  transition: color 0.2s;
 }
 
 .navbar .nav-link:hover {
-  color: #0d6efd;            /* أزرق عند المرور */
-}
-
-/* قائمة اختيار اللغة */
-.form-select-sm {
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-/* زر تسجيل الدخول */
-.btn-outline-light {
   color: #0d6efd;
-  border-color: #0d6efd;
-  font-size: 14px;
 }
 
-.btn-outline-light:hover {
-  background-color: #0d6efd;
+/* ===== WISHLIST ICON ===== */
+.icon-link {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.wishlist-img-icon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
+  transition: transform 0.2s ease;
+}
+
+.wishlist-img-icon:hover {
+  transform: scale(1.1);
+}
+
+.wishlist-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  font-size: 11px;
+  padding: 2px 5px;
+  background-color: #dc3545;
+  color: #fff;
+}
+
+/* ===== LANGUAGE SELECT ===== */
+.language-select {
+  width: 60px;
+  font-size: 14px;
+  border-radius: 6px;
+  padding: 4px 8px;
+  background-color: #ffffff;
+  border: 2px solid #070707;
+  color: #212529;
+  transition: all 0.3s ease;
+  appearance: none;
+}
+
+.language-select:hover,
+.language-select:focus {
+  border-color: #000000;
+  outline: none;
+  box-shadow: 0 0 0 0.15rem rgba(80, 81, 81, 0.25);
+}
+
+/* ===== THEME TOGGLE BUTTON ===== */
+.theme-toggle-btn {
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.mode-icon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.mode-icon:hover {
+  transform: rotate(20deg);
+}
+
+/* ===== LOGIN / LOGOUT BUTTONS ===== */
+.auth-btn {
+  width: 100px;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: 2px solid #5c5c5c;          /* Gold accent */
+  color: #232322;                     /* Dark text for light mode */
+  background-color: #fff;             /* White background */
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.auth-btn:hover {
+  background-color: #ffc107;
   color: #fff;
 }
 
 
 
-.btn-nav {
-  background-color: white;
-  color: black;
-  border: 1px solid #ccc;
-  font-weight: bold;
-  padding: 5px 10px;
-  font-size: 24px;
-  border-radius: 4px;
-  transition: 0.3s ease;
-}
-
-.navbar .nav-link {
-  font-size: 28px; 
-  font-weight: bold;
-  padding: 15px 15px;
-}
-
-.navbar-nav {
-  padding-top: 6px; 
-}
+/* ===== DARK MODE STYLES ===== */
 body.dark-mode {
   background-color: #121212;
   color: #f1f1f1;
+}
+
+body.dark-mode .navbar-container {
+  background-color: #0e0d0d !important;
+}
+
+body.dark-mode .nav-link {
+  color: #f8f9fa !important;
+}
+
+.app-title .text {
+  color: #000000; /* Black for light mode */
+}
+
+:host-context(body.dark-mode) .app-title .text {
+  color: #ffc107 !important; /* Gold for dark mode */
+}
+
+.theme-text {
+  color: #000; /* Black in light mode */
+}
+
+/* Gold in dark mode */
+:host-context(body.dark-mode) .theme-text {
+  color: #ffc107 !important; /* Gold in dark mode */
+}
+
+body.dark-mode .language-select {
+  background-color: #2c2c2c;
+  color: #f1f1f1;
+  border: 1px solid #555;
+}
+
+/* ===== USERNAME TEXT ===== */
+.username {
+  font-weight: 500;
+  color: #212529; /* Black for light mode */
+}
+
+:host-context(body.dark-mode) .username {
+  color: #ffc107 !important;
+}
+
+:host-context(body.dark-mode) .navbar-container {
+  background-color: #131212 !important;
+}
+
+:host-context(body.dark-mode) .auth-btn {
+  border: 2px solid #6f6f6f;          /* Gold accent */
+  color: #ffc107;                     /* Dark text for light mode */
+  background-color: #131212;             /* White background */
   transition: all 0.3s ease;
+  font-weight: 500;
 }
 
-body.dark-mode .navbar {
-  background-color: #1f1f1f !important;
+:host-context(body.dark-mode) .auth-btn:hover {
+  background-color: #ffc107;
+  color: #fff;
 }
 
-body.dark-mode .nav-link,
-body.dark-mode .dropdown-item {
-  color: #ffcc00 !important;
+:host-context(body.dark-mode) .language-select {
+  background-color: #131212;
+  border: 2px solid #6f6f6f;
+  color: #ffc107;
 }
-
-body.dark-mode .app-title .text {
-  background: linear-gradient(90deg, #ffcc00, #ffc107);
-  background-size: 200%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-body.dark-mode .btn-nav {
-  background-color: #000 !important;
-  color: #ffcc00 !important;
-  border-color: #888 !important;
-}
-
-
-.dropdown-menu-custom .btn-nav {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-
-.dropdown-menu-custom {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  z-index: 1050;
-  width: 220px;
-  margin-top: 10px;
-  transition: all 0.3s ease;
-  background-color: #1f1f1f;
-  border-radius: 6px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-
-
