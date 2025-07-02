@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnChanges, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -16,7 +16,7 @@ import { Firebase } from '../../services/firebase';
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.css']
 })
-export class Navbar{
+export class Navbar {
 
   constructor(private languageService: Language ) {}
   
@@ -34,44 +34,32 @@ export class Navbar{
   }
   username: string | null = null;
   menuOpen = false;
-
-  
-applyDirection(lang: string) {
-    const direction = lang === 'ar' ? 'rtl' : 'ltr';
-    document.body.setAttribute('dir', direction);
-  }
   
 
-  ngOnInit(): void {
+    ngOnInit(): void {
 
-    this.language = this.languageService.currentLanguage;
-    
+        this.language = this.languageService.currentLanguage;
+        const savedLang = sessionStorage.getItem('lang');
+      
+        if (savedLang) {
+          this.language = savedLang;
+          this.movieByLanguage.language = savedLang;
+        }
 
-    const savedLang = sessionStorage.getItem('lang');
-  
-    if (savedLang) {
-      this.language = savedLang;
-      this.movieByLanguage.language = savedLang;
-      this.applyDirection(savedLang);
+        const savedTheme = sessionStorage.getItem('theme');
+        this.isDarkMode = savedTheme === 'dark';
+
+        if (this.isDarkMode) {
+          document.body.classList.add('dark-mode');
+        }
+        
     }
-
-    const savedTheme = sessionStorage.getItem('theme');
-    this.isDarkMode = savedTheme === 'dark';
-
-    if (this.isDarkMode) {
-      document.body.classList.add('dark-mode');
-    }
-
-}
     
-    //this.wishlistCount = this.firebaseService.wishlist.length;
-
-  
 
    changeLanguage() {
-    sessionStorage.setItem("lang", JSON.stringify(this.movieByLanguage.language) )
-    this.languageService.setLanguage(this.language);
-  }
+      sessionStorage.setItem("lang", JSON.stringify(this.movieByLanguage.language) )
+      this.languageService.setLanguage(this.language);
+    }
 
 
 
