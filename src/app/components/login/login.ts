@@ -55,6 +55,7 @@ onSubmit() {
           sessionStorage.setItem('username', username);
 
           this.router.navigate(['/']).then(() => window.location.reload());
+          sessionStorage.setItem("userEmail", email);
         },
         error: (error) => {
           console.error('Login error:', error);
