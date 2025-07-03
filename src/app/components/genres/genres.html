@@ -1,35 +1,29 @@
-<div class="container my-5">
-    <h2 class="mb-4">
-        
-        Browse by Genre
-    </h2>
-  
-    <div class="genres-grid">
-      @for(g of genres(); track g.id){
-        <button
-          class="genre-chip"
-          (click)="toggle(g.id)"
-          [class.active]="selectedGenreId() === g.id">
-          {{ g.name }}
-        </button>
-      }
-    </div>
-  
+<div class="container h-auto my-5">
+  <h2 class="mb-4">Browse by Genre</h2>
+
+  <div class="genres-grid">
     @for(g of genres(); track g.id){
-      <section
-        *ngIf="selectedGenreId() === g.id && moviesMap()[g.id]"
-        class="genre-section">
-        <h3 class="mt-5">{{ g.name }}</h3>
-  
-        <div class="movies-row">
-          @for(m of moviesMap()[g.id]; track m.id){
-            <a [routerLink]="['/movie', m.id]" class="movie-card">
-              <img [src]="'https://image.tmdb.org/t/p/w300'+m.poster_path" [alt]="m.title">
-              <span class="title">{{ m.title }}</span>
-            </a>
-          }
-        </div>
-      </section>
+      <button
+        class="genre-chip"
+        (click)="toggle(g.id)"
+        [class.active]="selectedGenreId() === g.id">
+        {{ g.name }}
+      </button>
     }
   </div>
-  
+
+  @for(g of genres(); track g.id){
+    <section *ngIf="selectedGenreId() === g.id && moviesMap()[g.id]" class="genre-section">
+      <h3 class="mt-5">{{ g.name }}</h3>
+
+      <div class="movies-row">
+        @for(m of moviesMap()[g.id]; track m.id){
+          <a [routerLink]="['/movie', m.id]" class="movie-card">
+            <img [src]="'https://image.tmdb.org/t/p/w300'+m.poster_path" [alt]="m.title">
+            <span class="title">{{ m.title }}</span>
+          </a>
+        }
+      </div>
+    </section>
+  }
+</div>
