@@ -99,8 +99,7 @@
 }
 
 .movie-card {
-  background-color: #bfcee5;
-  color: #000000;
+  background-color: #bfcee5 !important;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
   transition: transform 0.3s ease;
@@ -216,8 +215,8 @@
   color: #e0d8d8;
 }
 
-.movie-card {
-  background-color: #131212;
+:host-context(body.dark-mode) .movie-card {
+  background-color: #131212 !important;
 }
 
 /* ================== RESPONSIVE ================== */
