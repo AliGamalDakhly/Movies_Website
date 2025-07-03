@@ -1,3 +1,4 @@
+@if(language == "en"){
 <nav class="navbar-container navbar navbar-expand-lg bg-light px-4 py-2">
   <a class="navbar-brand app-title" routerLink="/">
   <span class="icon">🎬</span><span class="text">
@@ -17,8 +18,7 @@
         <span class="badge bg-warning text-dark ms-1">{{ firebaseService.wishlist.length }}</span>
       }
       <li class="nav-item">
-
-        <a class="nav-link" routerLink="/wishlist">
+       <a class="nav-link" routerLink="/wishlist">
           {{ language === 'ar' ? 'أفلامك' : 'Wishlist' }}
         </a>
       </li>
@@ -28,6 +28,7 @@
         <a class="nav-link" routerLink="/Genre">
           {{ language === 'ar' ? 'الأنواع' : 'Genres' }}
         </a>
+        <a class="nav-link" routerLink="/wishlist">Wishlist</a>
       </li>
     </ul>
 
@@ -43,12 +44,61 @@
       <button class="btn btn-outline-light btn-sm">🌙</button>
 
 
-      <span class="text-white" ></span>
-      <a class="btn btn-outline-light btn-sm" routerLink="/login">
-        {{ language === 'ar' ? 'تسجيل' : 'Login' }}
-      </a>
+      <span class="text-white" >{{firebaseService.currentUser?.FirstName}}</span>
+      @if(firebaseService.currentUser)
+      {
+        <a class="btn btn-outline-light btn-sm" routerLink="/login" (click)="logout()">Logout</a>
+      }
+      @else 
+      {
+        <a class="btn btn-outline-light btn-sm" routerLink="/login">Login</a>
+      }    
     </div>
   </div>
 </nav>
+
+    }
+@else if(language == "ar") {
+  <nav class=".navbar-container navbar navbar-expand-lg bg-light px-4 py-2">
+    <a class="navbar-brand app-title" routerLink="/">
+    <span class="icon">🎬</span><span class="text">أ-فلامكو</span>
+  </a>
+  
+    <div class="collapse navbar-collapse justify-content-between">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">الرئيسية</a>
+        </li>
+        <span class="badge bg-warning text-dark ms-1">{{ firebaseService.wishlist.length }}</span>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/wishlist">أفلامك</a>
+        </li>
+      </ul>
+  
+      <div class="d-flex align-items-center gap-3">
+
+        
+        <select class="form-select form-select-sm"  [(ngModel)]="language" (ngModelChange)="onChange()">
+          @for(lang of languages; track lang) {
+            <option [value]="lang">{{lang}}</option>
+          }
+        </select>
+  
+
+        <button class="btn btn-outline-light btn-sm">🌙</button>
+
+        
+        @if(firebaseService.currentUser)
+        {
+          <span class="text-white" >{{firebaseService.currentUser?.FirstName}}</span>
+          <a class="btn btn-outline-light btn-sm" routerLink="/login" (click)="logout()">تسجيل خروج</a>
+        }
+        @else 
+        {
+          <a class="btn btn-outline-light btn-sm" routerLink="/login"> تسجيل دخول</a>
+        }    
+      </div>
+    </div>
+  </nav>
 
  

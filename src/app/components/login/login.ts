@@ -43,10 +43,19 @@ onSubmit() {
 
       this.authService.login(email, password).subscribe({
         next: (userCredential) => {
+          // console.log('Login successful:', userCredential);
+          // this.isLoading = false;
+          // // Redirect to dashboard or home page
+          // this.router.navigate(['/navbar']); // Change route as needed
+
           console.log('Login successful:', userCredential);
           this.isLoading = false;
-          // Redirect to dashboard or home page
-          this.router.navigate(['/navbar']); // Change route as needed
+
+          const username = userCredential.user?.displayName || userCredential.user?.email || 'User';
+          sessionStorage.setItem('username', username);
+
+          this.router.navigate(['/']).then(() => window.location.reload());
+          sessionStorage.setItem("userEmail", email);
         },
         error: (error) => {
           console.error('Login error:', error);

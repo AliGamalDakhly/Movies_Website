@@ -59,11 +59,7 @@ applyDirection(lang: string) {
     if (savedTheme === 'dark') {
       document.body.classList.add('dark-mode');
     }
-    this.languageService.language$.subscribe(lang => {
-      this.language = lang;
-      
-      document.body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-    });
+
 }
     
     //this.wishlistCount = this.firebaseService.wishlist.length;

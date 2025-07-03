@@ -12,6 +12,7 @@ import { GenresComponent } from './components/genres/genres';
 
 
 
+
 export const routes: Routes = [
     //  { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '', component: MovieCard },
@@ -21,6 +22,7 @@ export const routes: Routes = [
       { path: 'wishlist', component: Wishlist },
       { path: 'movie/:id', component: MovieDetails },
       {path: 'Genre',component: GenresComponent},
+
       { path: '**', component: PageNotFound }
 
 ];
