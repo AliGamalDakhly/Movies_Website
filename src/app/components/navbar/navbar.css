@@ -1,134 +1,198 @@
-/* Basic navbar styling */
+/* ===== NAVBAR CONTAINER ===== */
 .navbar-container {
   padding: 6px 24px;
   background-color: #f8f9fa;
 }
 
+/* ===== APP TITLE ===== */
 .app-title {
   font-size: 24px;
   font-weight: bold;
+  text-decoration: none;
   color: #0d6efd;
   transition: transform 0.3s ease;
 }
+
 .app-title:hover {
   transform: scale(1.05);
 }
+
+.app-title .text {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ===== MOVIE LOGO ===== */
 .movie-logo-icon {
   width: 30px;
   height: 30px;
   object-fit: contain;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.15));
 }
 
-/* Wishlist */
-.icon-link {
-  position: relative;
-  display: inline-block;
+/* ===== NAV LINKS ===== */
+.navbar .nav-link {
+  color: #212529;
+  font-size: 16px;
+  transition: color 0.2s;
 }
+
+.navbar .nav-link:hover {
+  color: #0d6efd;
+}
+
+/* ===== WISHLIST ICON ===== */
+.icon-link {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
 .wishlist-img-icon {
   width: 26px;
   height: 26px;
+  object-fit: contain;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.2));
+  transition: transform 0.2s ease;
 }
+
+.wishlist-img-icon:hover {
+  transform: scale(1.1);
+}
+
 .wishlist-badge {
   position: absolute;
   top: -6px;
   right: -8px;
   font-size: 11px;
   padding: 2px 5px;
-}
-
-/* Buttons */
-.auth-btn {
-  min-width: 100px;
-  font-size: 14px;
-  padding: 6px 12px;
-  border-radius: 5px;
-  border: 2px solid #5c5c5c;
-  background-color: #fff;
-  color: #232322;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-.auth-btn:hover {
-  background-color: #ffc107;
+  background-color: #dc3545;
   color: #fff;
 }
+
+/* ===== LANGUAGE SELECT ===== */
+.language-select {
+  width: 60px;
+  font-size: 14px;
+  border-radius: 6px;
+  padding: 4px 8px;
+  background-color: #ffffff;
+  border: 2px solid #070707;
+  color: #212529;
+  transition: all 0.3s ease;
+  appearance: none;
+}
+
+.language-select:hover,
+.language-select:focus {
+  border-color: #000000;
+  outline: none;
+  box-shadow: 0 0 0 0.15rem rgba(80, 81, 81, 0.25);
+}
+
+/* ===== THEME TOGGLE BUTTON ===== */
 .theme-toggle-btn {
   background: transparent;
   border: none;
   padding: 4px;
+  cursor: pointer;
 }
+
 .mode-icon {
   width: 24px;
   height: 24px;
   transition: transform 0.3s ease;
 }
+
 .mode-icon:hover {
   transform: rotate(20deg);
 }
 
-/* Language Select */
-.language-select {
-  width: 70px;
+/* ===== LOGIN / LOGOUT BUTTONS ===== */
+.auth-btn {
+  width: 100px;
   font-size: 14px;
-  padding: 4px 8px;
-}
-
-/* Username */
-.username {
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: 2px solid #5c5c5c;          /* Gold accent */
+  color: #232322;                     /* Dark text for light mode */
+  background-color: #fff;             /* White background */
+  transition: all 0.3s ease;
   font-weight: 500;
-  color: #212529;
 }
 
-/* Dark Mode */
+.auth-btn:hover {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+
+
+/* ===== DARK MODE STYLES ===== */
 body.dark-mode {
   background-color: #121212;
   color: #f1f1f1;
 }
+
 body.dark-mode .navbar-container {
-  background-color: #0e0d0d;
+  background-color: #0e0d0d !important;
 }
-body.dark-mode .nav-link,
-body.dark-mode .username {
+
+body.dark-mode .nav-link {
+  color: #f8f9fa !important;
+}
+
+.app-title .text {
+  color: #000000; /* Black for light mode */
+}
+
+:host-context(body.dark-mode) .app-title .text {
+  color: #ffc107 !important; /* Gold for dark mode */
+}
+
+.theme-text {
+  color: #000; /* Black in light mode */
+}
+
+/* Gold in dark mode */
+:host-context(body.dark-mode) .theme-text {
+  color: #ffc107 !important; /* Gold in dark mode */
+}
+
+body.dark-mode .language-select {
+  background-color: #2c2c2c;
+  color: #f1f1f1;
+  border: 1px solid #555;
+}
+
+/* ===== USERNAME TEXT ===== */
+.username {
+  font-weight: 500;
+  color: #212529; /* Black for light mode */
+}
+
+:host-context(body.dark-mode) .username {
   color: #ffc107 !important;
 }
-body.dark-mode .auth-btn {
-  border-color: #6f6f6f;
-  color: #ffc107;
-  background-color: #131212;
+
+:host-context(body.dark-mode) .navbar-container {
+  background-color: #131212 !important;
 }
-body.dark-mode .auth-btn:hover {
+
+:host-context(body.dark-mode) .auth-btn {
+  border: 2px solid #6f6f6f;          /* Gold accent */
+  color: #ffc107;                     /* Dark text for light mode */
+  background-color: #131212;             /* White background */
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+:host-context(body.dark-mode) .auth-btn:hover {
   background-color: #ffc107;
   color: #fff;
 }
-body.dark-mode .language-select {
+
+:host-context(body.dark-mode) .language-select {
   background-color: #131212;
   border: 2px solid #6f6f6f;
   color: #ffc107;
-}
-
-/* MOBILE FIXES */
-@media (max-width: 991.98px) {
-  .navbar-nav {
-    gap: 0.5rem !important;
-  }
-
-  .navbar-collapse {
-    padding: 1rem;
-  }
-
-  .navbar-nav,
-  .navbar-collapse > div {
-    align-items: flex-start !important;
-  }
-
-  .username,
-  .auth-btn,
-  .language-select,
-  .theme-toggle-btn {
-    width: 100%;
-  }
-
-  .auth-btn {
-    text-align: center;
-  }
 }
