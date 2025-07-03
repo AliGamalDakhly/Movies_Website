@@ -7,6 +7,9 @@ import { Navbar } from './components/navbar/navbar';
 import { MovieCard } from './components/movie-card/movie-card';
 import { Wishlist } from './components/wishlist/wishlist';
 import { MovieDetails } from './components/movie-details/movie-details';
+import { PageNotFound } from './components/page-not-found/page-not-found';
+import { GenresComponent } from './components/genres/genres';
+
 
 
 export const routes: Routes = [
@@ -17,6 +20,9 @@ export const routes: Routes = [
       { path: 'register', component: Register },
       { path: 'wishlist', component: Wishlist },
       { path: 'movie/:id', component: MovieDetails },
+      {path: 'Genre',component: GenresComponent},
+      { path: '**', component: PageNotFound }
+
 ];
 
 @NgModule({
