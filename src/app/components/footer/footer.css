@@ -1,54 +1,92 @@
 .custom-footer {
-  background-color: #f8f9fa;
+  background-color: #d6d7d8;
   color: #212529;
-  padding: 30px 0;
-  border-top: 1px solid #dee2e6;
-  font-family: 'Segoe UI', sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  padding: 12px 24px;
+  font-size: 14px;
+  border-top: 1px solid #e0e0e0;
 }
 
 .footer-top {
-  border-bottom: 1px solid #dee2e6;
-  padding-bottom: 15px;
-}
-
-.footer-links .footer-link {
-  color: #0d6efd;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.footer-links .footer-link:hover {
-  color: #0056b3;
-  text-decoration: underline;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
 }
 
 .footer-brand {
   display: flex;
   align-items: center;
+  font-size: 20px;
+  font-family: 'Segoe UI', sans-serif;
   gap: 6px;
-  font-size: 22px;
-  font-weight: bold;
-  color: #198754;
 }
 
 .brand-icon {
-  font-size: 24px;
-}
-
-.social-icons .social-icon {
-  font-size: 20px;
+  font-size: 22px;
   color: #0d6efd;
-  transition: transform 0.2s ease;
 }
 
-.social-icons .social-icon:hover {
-  color: #0056b3;
-  transform: scale(1.2);
+.brand-text {
+  font-weight: bold;
+  color: #0d6efd;
+}
+
+.social-icon {
+  color: #5c5c5c;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.social-icon:hover {
+  color: #0d6efd;
+}
+
+.footer-bottom {
+  margin-top: 12px;
 }
 
 .footer-copy {
-  font-size: 14px;
-  color: #6c757d;
+  font-size: 13px;
+  color: #444;
+}
+
+/* ===== DARK MODE ===== */
+:host-context(body.dark-mode) .custom-footer {
+  background-color: #131212;
+  color: #ccc;
+  border-top: 1px solid #333;
+}
+
+:host-context(body.dark-mode) .brand-icon {
+  color: #ffc107;
+}
+
+:host-context(body.dark-mode) .brand-text {
+  color: #ffc107;
+}
+
+:host-context(body.dark-mode) .social-icon {
+  color: #aaa;
+}
+
+:host-context(body.dark-mode) .social-icon:hover {
+  color: #ffc107;
+}
+
+:host-context(body.dark-mode) .footer-copy {
+  color: #aaa;
+}
+
+.theme-text {
+  color: #000;
+}
+
+:host-context(body.dark-mode) .theme-text {
+  color: #ffc107 !important;
+}
+
+.movie-logo-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.15));
 }

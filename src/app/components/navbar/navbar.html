@@ -1,104 +1,76 @@
-@if(language == "en"){
-<nav class="navbar-container navbar navbar-expand-lg bg-light px-4 py-2">
-  <a class="navbar-brand app-title" routerLink="/">
-  <span class="icon">🎬</span><span class="text">
-    {{ language === 'ar' ? 'أ-فلامكو' : 'MovieApp' }}
-  </span>
-</a>
+<nav class="navbar-container navbar navbar-expand-lg" [ngClass]="{'dark-mode': isDarkMode}">
+  <div class="container-fluid">
 
-  <div class="collapse navbar-collapse justify-content-between">
-    <ul class="navbar-nav me-auto">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/">
-          {{ language === 'ar' ? 'الرئيسية' : 'Home' }}
-        </a>
-      </li>
-      @if(firebaseService.currentUser)
-      {
-        <span class="badge bg-warning text-dark ms-1">{{ firebaseService.wishlist.length }}</span>
-      }
-      <li class="nav-item">
-       <a class="nav-link" routerLink="/wishlist">
-          {{ language === 'ar' ? 'أفلامك' : 'Wishlist' }}
-        </a>
-      </li>
+    <!-- Left Section -->
+    <div class="d-flex align-items-center">
+      <a class="navbar-brand app-title d-flex align-items-center gap-2" routerLink="/">
+        <img src="https://cdn-icons-png.flaticon.com/512/17115/17115490.png" alt="movie logo" class="movie-logo-icon" />
+        <span class="text">Aflamko</span>
+      </a>
 
-      <li class="nav-item">
+      <ul class="navbar-nav flex-row gap-3 align-items-center ms-3">
+        <li class="nav-item">
+          <a class="nav-link fw-semibold theme-text" routerLink="/">
+            {{ language === 'ar' ? 'الرئيسية' : 'Home' }}
+          </a>
+        </li>
+         <li class="nav-item">
+           <a class="nav-link" routerLink="/Genre">
+            {{ language === 'ar' ? 'الأنواع' : 'Genres' }}
+          </a>
+        </li>
+        
+        <!-- Wishlist with Heart Icon -->
+        <li class="nav-item position-relative">
+          <a class=" icon-link" routerLink="/wishlist">
+            <img src="https://cdn-icons-png.flaticon.com/512/15017/15017504.png"
+                 alt="wishlist"
+                 class="wishlist-img-icon" />
+            <span *ngIf="firebaseService.currentUser"
+                  class="wishlist-badge badge rounded-pill bg-danger">
+              {{ firebaseService.wishlist.length }}
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
 
-        <a class="nav-link" routerLink="/Genre">
-          {{ language === 'ar' ? 'الأنواع' : 'Genres' }}
-        </a>
-        <a class="nav-link" routerLink="/wishlist">Wishlist</a>
-      </li>
-    </ul>
-
+    <!-- Right Section -->
     <div class="d-flex align-items-center gap-3">
 
-      
-      <select class="form-select form-select-sm"  [(ngModel)]="language" (ngModelChange)="onChange()">
-        @for(lang of languages; track lang) {
-          <option [value]="lang">{{lang}}</option>
-        }
+      <select class="form-select form-select-sm language-select" [(ngModel)]="language" (ngModelChange)="onChange()">
+        <option *ngFor="let lang of languages" [value]="lang">{{ lang }}</option>
       </select>
 
-      <button class="btn btn-outline-light btn-sm">🌙</button>
+      <button class="btn theme-toggle-btn" (click)="toggleDarkMode()">
+        <img
+          [src]="isDarkMode
+            ? 'https://cdn-icons-png.flaticon.com/512/2490/2490255.png'
+            : 'https://cdn-icons-png.flaticon.com/512/2490/2490148.png'"
+          alt="Toggle Theme"
+          class="mode-icon"
+        />
+      </button>
 
 
-      <span class="text-white" >{{firebaseService.currentUser?.FirstName}}</span>
-      @if(firebaseService.currentUser)
-      {
-        <a class="btn btn-outline-light btn-sm" routerLink="/login" (click)="logout()">Logout</a>
-      }
-      @else 
-      {
-        <a class="btn btn-outline-light btn-sm" routerLink="/login">Login</a>
-      }    
+      <span class="username" *ngIf="firebaseService.currentUser">
+        {{ firebaseService.currentUser.FirstName }}
+      </span>
+
+      <a *ngIf="firebaseService.currentUser; else guest"
+         class="btn btn-outline-light  auth-btn"
+         routerLink="/login"
+         (click)="logout()">
+         {{ language === 'ar' ? 'تسجيل خروج' : 'Logout' }}
+      </a>
+
+      <ng-template #guest>
+        <a class="btn btn-outline-light  auth-btn" routerLink="/login">
+          {{ language === 'ar' ? 'تسجيل دخول' : 'Login' }}
+        </a>
+      </ng-template>
+
     </div>
   </div>
 </nav>
 
-    }
-@else if(language == "ar") {
-  <nav class=".navbar-container navbar navbar-expand-lg bg-light px-4 py-2">
-    <a class="navbar-brand app-title" routerLink="/">
-    <span class="icon">🎬</span><span class="text">أ-فلامكو</span>
-  </a>
-  
-    <div class="collapse navbar-collapse justify-content-between">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/">الرئيسية</a>
-        </li>
-        <span class="badge bg-warning text-dark ms-1">{{ firebaseService.wishlist.length }}</span>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/wishlist">أفلامك</a>
-        </li>
-      </ul>
-  
-      <div class="d-flex align-items-center gap-3">
-
-        
-        <select class="form-select form-select-sm"  [(ngModel)]="language" (ngModelChange)="onChange()">
-          @for(lang of languages; track lang) {
-            <option [value]="lang">{{lang}}</option>
-          }
-        </select>
-  
-
-        <button class="btn btn-outline-light btn-sm">🌙</button>
-
-        
-        @if(firebaseService.currentUser)
-        {
-          <span class="text-white" >{{firebaseService.currentUser?.FirstName}}</span>
-          <a class="btn btn-outline-light btn-sm" routerLink="/login" (click)="logout()">تسجيل خروج</a>
-        }
-        @else 
-        {
-          <a class="btn btn-outline-light btn-sm" routerLink="/login"> تسجيل دخول</a>
-        }    
-      </div>
-    </div>
-  </nav>
-
- 
