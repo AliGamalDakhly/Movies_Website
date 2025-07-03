@@ -1,55 +1,139 @@
+/* ========== SEARCH CONTAINER ========== */
 .container {
-    color: #ffffff;
-    background-color: #032541;
-    padding: 40px 20px;
-    border-radius: 12px;
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .container h1 {
-    color: #01b4e4; /* TMDB Cyan */
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-  
-  .container p {
-    color: #90cea1; /* TMDB Greenish highlight */
-    margin-bottom: 30px;
-  }
-  
+  background-color: #bfcee5;
+  color: #ffffff;
+  padding: 40px 20px;
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 30px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* ========== HEADINGS & TEXT ========== */
+.container h1 {
+  color: #0a041e;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.container p {
+  color: #0a041e;
+  font-size: 1.05rem;
+  margin-bottom: 30px;
+}
+
+/* ========== INPUT GROUP ========== */
+.input-group {
+  max-width: 600px;
+  margin: 0 auto 20px auto;
+  display: flex;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.input-group .form-control {
+  flex: 1;
+  background-color: #ffffff;
+  color: #0a041e;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  outline: none;
+  border-radius: 0;
+}
+
+.input-group .form-control::placeholder {
+  color: #888;
+  opacity: 0.8;
+}
+
+/* ========== SEARCH & RESET BUTTONS ========== */
+.btn.search-btn {
+  background-color: #0a041e;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  border-radius: 0;
+}
+
+.btn.search-btn:hover {
+  background-color: #7e7e7e;
+  color: #0a041e;
+}
+
+.btn-outline-danger.search-btn {
+  margin-top: 10px;
+  background-color: transparent;
+  border: 2px solid #0a041e;
+  color: #0a041e;
+  border-radius: 25px;
+  transition: 0.3s ease;
+}
+
+.btn-outline-danger.search-btn:hover {
+  background-color: #0a041e;
+  color: #fff;
+}
+
+@media (max-width: 480px) {
   .input-group {
-    max-width: 600px;
-    margin: 0 auto;
+    flex-direction: column;
+    border-radius: 12px;
+    overflow: visible;
   }
-  
+
   .input-group .form-control {
-    background-color: #ffffff;
-    color: #032541;
-    border: none;
-    border-radius: 25px 0 0 25px;
-    padding: 12px 20px;
-    font-size: 16px;
-    box-shadow: none;
+    border-radius: 12px 12px 0 0;
   }
-  
-  .input-group .form-control::placeholder {
-    color: #666;
-    opacity: 0.8;
+
+  .btn.search-btn {
+    border-radius: 0 0 12px 12px;
   }
-  
-  .input-group .btn.search-btn {
-    background-color: #01b4e4;
-    color: white;
-    border: none;
-    border-radius: 0 25px 25px 0;
-    padding: 12px 24px;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
+
+  .btn-outline-danger.search-btn {
+    width: 100%;
   }
-  
-  .input-group .btn.search-btn:hover {
-    background-color: #90cea1;
-    color: #032541;
-  }
-  
+}
+
+
+:host-context(body.dark-mode) .container {
+  background-color: #131212;
+}
+
+:host-context(body.dark-mode) .container h1 {
+  color: #e0d8d8;
+}
+
+:host-context(body.dark-mode) .container p {
+  color: #e0d8d8;
+}
+
+:host-context(body.dark-mode) .input-group .form-control {
+  background-color: #292727;
+  color: #e0d8d8;
+
+}
+
+:host-context(body.dark-mode) .btn.search-btn {
+  background-color: #000000;
+  color: #e0d8d8;
+}
+
+:host-context(body.dark-mode) .btn.search-btn:hover {
+  background-color: #7e7e7e;
+  color: #000000;
+}
+
+:host-context(body.dark-mode) .btn-outline-danger.search-btn {
+  border: 2px solid #000000;
+  color: #e0d8d8;
+}
+
+:host-context(body.dark-mode) .btn-outline-danger.search-btn:hover {
+  background-color: #7e7e7e;
+  color: #000000;
+}
