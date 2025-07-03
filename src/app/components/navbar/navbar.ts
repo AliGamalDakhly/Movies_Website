@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnChanges, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Route, Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Movies } from '../../services/movies';
 import { Language } from '../../services/language';
@@ -18,7 +18,7 @@ import { Firebase } from '../../services/firebase';
 })
 export class Navbar {
 
-  constructor(private languageService: Language ) {}
+  constructor(private languageService: Language, private router: Router ) {}
   
   language = 'en';
   languages = ['en', 'ar'];
@@ -79,7 +79,7 @@ export class Navbar {
   logout() {
     sessionStorage.removeItem('userEmail');
     this.username = null;
-    window.location.href = '/login'; 
+    this.router.navigate(['/login']); // Navigate to login component
   }
 
  
