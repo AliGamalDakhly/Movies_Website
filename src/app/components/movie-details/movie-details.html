@@ -1,4 +1,4 @@
-<div class="movie-details-container" *ngIf="movie && currentUser">
+<div class="movie-details-container" *ngIf="movie">
   <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{movie.title}}" class="movie-poster">
   <div class="movie-info">
     <h2>{{ movie?.title }}</h2>
@@ -18,9 +18,12 @@
     <p><strong>Overview:</strong> {{ movie?.overview }}</p>
   </div>
   <div *ngIf="trailerKey" class="trailer-container">
-  <h3>Official Trailer</h3>
+  <h3>
+    {{ language === 'ar' ? 'البرومو الرسمي' : 'Official Trailer' }}
+    
+  </h3>
   <iframe width="100%" height="400"
-    [src]="'https://www.youtube.com/embed/' + trailerKey"
+    [src]="trailerUrl"
     title="YouTube video player" frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen>
@@ -28,7 +31,9 @@
 </div>
 </div>
 <div *ngIf="recommendedMovies.length > 0" class="recommended-section">
-  <h3 class="mt-4">Recommended Movies</h3>
+  <h3 class="me-5 mb-5">
+    {{ language === 'ar' ? 'أفلام موصى بها' : 'Recommended Movies' }}
+  </h3>
   <div class="card-container">
     <mat-card *ngFor="let movie of recommendedMovies" class="example-card">
       <a [routerLink]="['/movie', movie.id]">

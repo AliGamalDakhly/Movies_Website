@@ -10,6 +10,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Firebase } from '../../services/firebase';
 import { User } from '../../Models/user';
 import { firstValueFrom } from 'rxjs';
+import { Language } from '../../services/language';
 
 
 @Component({
@@ -25,41 +26,50 @@ export class MovieDetails implements OnInit {
   recommendedMovies: MovieItem[] = [];
   trailerUrl: SafeResourceUrl | null = null;
   currentUser: User | null = null;
-
+  language: string = 'en';
 
   constructor(private route: ActivatedRoute,
               private movieService: Movies,
               private sanitizer: DomSanitizer,
+              private languageService: Language,
               private firebaseService: Firebase) {}
 
   ngOnInit(): void {
     const movieId = +this.route.snapshot.paramMap.get('id')!;
 
-    // Get movie details
-    this.movieService.getMovieById(movieId).subscribe(movie => {
+     this.languageService.language$.subscribe((newLang) => {
+    this.movieService.getMovieById(movieId, newLang).subscribe(movie => {
       this.movie = movie;
+      this.language = newLang;
     });
-
-    // Get videos and extract trailer
-    this.movieService.getMovieVideos(movieId).subscribe(res => {
-      const trailer = res.results.find(
-        (video: any) => video.type === 'Trailer' && video.site === 'YouTube'
-      );
-      if (trailer) {
-        this.trailerKey = trailer.key;
-      }
-    });
-    this.movieService.getRecommendedMovies(movieId).subscribe(res => {
+    this.movieService.getRecommendedMovies(movieId, newLang ).subscribe(res => {
         this.recommendedMovies = res.results;
     });
+  });
+
+  
+     this.movieService.getMovieVideos(movieId).subscribe(res => {
+    const trailer = res.results.find(
+      (video: any) => video.type === 'Trailer' && video.site === 'YouTube'
+    );
+    if (trailer) {
+      this.trailerKey = trailer.key;
+      const url = `https://www.youtube.com/embed/${this.trailerKey}`;
+      this.trailerUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url); // ✅ secure YouTube URL
+    }
+  });
+    
     this.firebaseService.Init().then(() => {
       this.currentUser = this.firebaseService.currentUser;
 });
 
   }
+
   isInWishlist(movieId: number): boolean {
   return this.firebaseService.wishlist.some(movie => movie.id === movieId);
-}
+  }
+
+
 
 async toggleWishlist(movieId: number) {
   if (!this.currentUser) return;
@@ -71,7 +81,7 @@ async toggleWishlist(movieId: number) {
     this.firebaseService.wishlist = this.firebaseService.wishlist.filter(m => m.id !== movieId);
   } else {
     try {
-      const movie = await firstValueFrom(this.movieService.getMovieById(movieId));
+      const movie = await firstValueFrom(this.movieService.getMovieById(movieId, this.movieService.language));
       this.firebaseService.addToWishlist(this.currentUser.id, movieId);
       this.firebaseService.wishlist.push(movie);
     } catch (err) {
