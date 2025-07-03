@@ -26,7 +26,7 @@ export class MovieDetails implements OnInit {
   recommendedMovies: MovieItem[] = [];
   trailerUrl: SafeResourceUrl | null = null;
   currentUser: User | null = null;
-
+  language: string = 'en';
 
   constructor(private route: ActivatedRoute,
               private movieService: Movies,
@@ -40,6 +40,7 @@ export class MovieDetails implements OnInit {
      this.languageService.language$.subscribe((newLang) => {
     this.movieService.getMovieById(movieId, newLang).subscribe(movie => {
       this.movie = movie;
+      this.language = newLang;
     });
     this.movieService.getRecommendedMovies(movieId, newLang ).subscribe(res => {
         this.recommendedMovies = res.results;
