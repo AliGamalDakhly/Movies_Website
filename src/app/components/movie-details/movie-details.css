@@ -215,3 +215,66 @@
 :host-context(body.dark-mode) .movie-title {
   color: #e0d8d8;
 }
+
+.movie-card {
+  background-color: #131212;
+}
+
+/* ================== RESPONSIVE ================== */
+
+@media (max-width: 992px) {
+  .movie-details-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 15px;
+  }
+
+  .movie-poster {
+    width: 80%;
+    height: auto;
+    max-width: 300px;
+  }
+
+  .movie-info {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+
+  .trailer-container {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 20px;
+  }
+
+  .movie-info h2 {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .movie-card {
+    width: 45%;
+  }
+}
+
+@media (max-width: 576px) {
+  .movie-card {
+    width: 100%;
+  }
+
+  .movie-details-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .movie-title {
+    font-size: 1rem;
+  }
+
+  .trailer-container iframe {
+    height: 200px;
+  }
+}
