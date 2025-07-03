@@ -9,6 +9,7 @@
 
 /* عنوان التطبيق */
 .app-title {
+
   background-color: transparent;
   font-size: 28px;
   font-weight: 700;
@@ -27,6 +28,7 @@
 
 /* أيقونة 🎬 */
 .app-title .icon {
+
   font-size: 26px;
   color: #198754;            /* أخضر Bootstrap */
 }
@@ -68,11 +70,6 @@
   color: #fff;
 }
 
-/* دعم نص من اليمين لليسار (عند الحاجة) */
-.right-to-left {
-  direction: rtl;
-
-}
 
 
 .btn-nav {
@@ -81,13 +78,13 @@
   border: 1px solid #ccc;
   font-weight: bold;
   padding: 5px 10px;
-  font-size: 28px;
+  font-size: 24px;
   border-radius: 4px;
   transition: 0.3s ease;
 }
 
 .navbar .nav-link {
-  font-size: 30px; 
+  font-size: 28px; 
   font-weight: bold;
   padding: 15px 15px;
 }
@@ -145,8 +142,4 @@ body.dark-mode .btn-nav {
 }
 
 
-[dir="rtl"] .dropdown-menu-custom {
-  right: auto;
-  left: 0;
-}
 

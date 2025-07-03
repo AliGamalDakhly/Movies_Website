@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Movies } from '../../services/movies';
 import { Language } from '../../services/language';
+import { Firebase } from '../../services/firebase';
 
 
 
@@ -17,51 +18,60 @@ import { Language } from '../../services/language';
 })
 export class Navbar{
 
-   language = 'en';
-  languages = ['en', 'ar', 'fr', 'zh'];
+  constructor(private languageService: Language ) {}
+  
+  language = 'en';
+  languages = ['en', 'ar'];
   isDarkMode = false;
   movieByLanguage = inject(Movies);
+  firebaseService = inject(Firebase);
 
   onChange(){
+    this.languageService.setLanguage(this.language);
     console.log(`Language changed to: ${this.language}`);
     this.movieByLanguage.getMoviesByPage(this.movieByLanguage.pageNumber,this.language);
+    document.body.removeAttribute('dir');
   }
   username: string | null = null;
   menuOpen = false;
-  isDarkMode = false;
-  movieByLanguage = inject(Movies);
 
   
-  constructor(private languageService: Language) {}
-
-  onChange(){
-    console.log(`Language changed to: ${this.language}`);
-    this.movieByLanguage.getMoviesByPage(this.movieByLanguage.pageNumber,this.language);
-  }
-
+applyDirection(lang: string) {
+    const direction = lang === 'ar' ? 'rtl' : 'ltr';
+    document.body.setAttribute('dir', direction);
+  }
+  
 
   ngOnInit(): void {
-
-    this.username = localStorage.getItem('username');
 
     this.language = this.languageService.currentLanguage;
     
 
-    const savedLang = localStorage.getItem('lang');
+    const savedLang = sessionStorage.getItem('lang');
+  
     if (savedLang) {
       this.language = savedLang;
+      this.movieByLanguage.language = savedLang;
       this.applyDirection(savedLang);
     }
 
-  
+    const savedTheme = sessionStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
+    this.languageService.language$.subscribe(lang => {
+      this.language = lang;
+      
+      document.body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    });
 }
-
     
     //this.wishlistCount = this.firebaseService.wishlist.length;
 
   
 
    changeLanguage() {
+    sessionStorage.setItem("lang", JSON.stringify(this.movieByLanguage.language) )
     this.languageService.setLanguage(this.language);
   }
 
@@ -69,17 +79,17 @@ export class Navbar{
 
   toggleDarkMode() {
     const isDark = document.body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', isDark ? 'light': 'dark' );
+    sessionStorage.setItem('theme', isDark ? 'light': 'dark' );
   }
 
   
   logout() {
-    localStorage.removeItem('username');
+    sessionStorage.removeItem('userEmail');
     this.username = null;
     window.location.href = '/'; 
   }
 
  
+
+
 }
-
-
