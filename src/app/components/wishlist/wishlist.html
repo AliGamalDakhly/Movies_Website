@@ -1,6 +1,6 @@
 <!-- LOADING STATE -->
 @if (loading) {
-  <div class="d-flex justify-content-center align-items-center text-white py-5" style="min-height: 75vh;">
+  <div class=" d-flex justify-content-center align-items-center text-white py-5 bg-light" style="min-height: 75vh;">
   <div class="text-center">
     <div class="spinner-border text-warning" role="status">
       <span class="visually-hidden">Loading...</span>
@@ -12,7 +12,7 @@
 
 <!-- EMPTY WISHLIST -->
 @else if (tempwish.length === 0) {
-  <div class="container-fluid p-5 bg-black">
+  <div class="container-fluid p-5 bg-light">
     <div class="wishlist-empty text-center my-5">
       <img src="https://cdn-icons-png.flaticon.com/512/4076/4076549.png" alt="Empty Wishlist" class="img-fluid mb-3" />
       <h2>Your Wishlist is Empty</h2>
@@ -26,7 +26,7 @@
 
 <!-- FILLED WISHLIST -->
 @else {
-  <div class="container-fluid p-5 bg-black">
+  <div class="container-fluid p-5 bg-light">
     <div class="container">
       <div class="row gy-4">
         @for (movie of tempwish; track movie.id) {
@@ -63,7 +63,7 @@
 
                   <!-- Description -->
                   <p class="text-muted mb-0">
-                    {{ movie.overview.length > 300 ? (movie.overview | slice:0:300) + '...' : movie.overview }}
+                    {{ movie.overview.length > 100 ? (movie.overview | slice:0:100) + '...' : movie.overview }}
                   </p>
                 </div>
 

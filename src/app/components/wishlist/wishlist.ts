@@ -1,10 +1,13 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, inject, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MovieItem } from '../../Models/movie-item';
 import { Firebase } from '../../services/firebase';
 import { Movies } from '../../services/movies';
 import { User } from '../../Models/user';
 import { RouterLink } from '@angular/router';
+import { Language } from '../../services/language';
+import { Subscription } from 'rxjs';
+import { OnDestroy } from '@angular/core';
 
 type StarType = 'full' | 'half' | 'empty';
 
@@ -14,26 +17,50 @@ type StarType = 'full' | 'half' | 'empty';
   templateUrl: './wishlist.html',
   styleUrl: './wishlist.css'
 })
-export class Wishlist {
+export class Wishlist implements OnInit{
 
   tempwish: MovieItem[] = [];
   currentUser: User| null = null;
   loading: boolean = true;
 
-  constructor(private firebaseService: Firebase,private movieService: Movies)
+  constructor(private movieService: Movies,private languageService: Language)
   {
 
   }
     
-  async ngOnInit() 
-  {
-      this.loading = true;
-      await this.firebaseService.Init(); 
-      this.tempwish = this.firebaseService.wishlist;
-      this.currentUser = this.firebaseService.currentUser;
-      this.loading = false;
+  firebaseService = inject(Firebase);
+
+ async ngOnInit() {
+  this.loading = true;
+
+  await this.firebaseService.Init(); 
+  this.currentUser = this.firebaseService.currentUser;
+
+  this.languageService.language$.subscribe((newLang) => {
+    this.updateWishlistByLanguage(newLang);
+  });
+
+  this.loading = false;
+}
+
+
+
+
+updateWishlistByLanguage(lang: string) {
+  this.tempwish = [];
+
+  if (this.currentUser) {
+    for (const movieId of this.currentUser.Wishlist) {
+      this.movieService.getMovieById(movieId, lang).subscribe(movie => {
+        movie.poster_path = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+        this.tempwish.push(movie);
+      });
+    }
   }
-    
+}
+
+
+
 
   getStarsFromRating(rating: number): StarType[] 
   {
