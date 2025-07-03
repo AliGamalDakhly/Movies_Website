@@ -1,89 +1,54 @@
 .custom-footer {
-  background-color: #1c1c1c;
-  color: #ccc;
-  padding: 22px 0;
-  font-size: 20px;
-  border-top: 1px solid #333;
+  background-color: #f8f9fa;
+  color: #212529;
+  padding: 30px 0;
+  border-top: 1px solid #dee2e6;
+  font-family: 'Segoe UI', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .footer-top {
-  gap: 10px;
-  margin-bottom: 12px;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 15px;
 }
 
-
-.footer-links a {
+.footer-links .footer-link {
+  color: #0d6efd;
   text-decoration: none;
-  color: #aaa;
-  transition: color 0.3s;
   font-weight: 500;
-  font-size: 20px;
+  transition: color 0.3s ease;
 }
 
-.footer-links a:hover {
-  color: #ffcc00;
+.footer-links .footer-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
 }
-
 
 .footer-brand {
   display: flex;
   align-items: center;
-  gap: 4px; 
-  white-space: nowrap;
-  font-size: 28px; 
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  gap: 6px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #198754;
 }
-
 
 .brand-icon {
-  color: #fff;
-  font-size: 28px; 
-  line-height: 1;
+  font-size: 24px;
 }
 
-
-.brand-text {
-  font-weight: bold;
-  background: linear-gradient(to right, #ffcc00, #ffc107);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-  letter-spacing: 0.5px;
-  line-height: 1;
+.social-icons .social-icon {
+  font-size: 20px;
+  color: #0d6efd;
+  transition: transform 0.2s ease;
 }
 
-
-.footer-bottom {
-  text-align: center;
-  font-size: 18px; 
-  color: #999;
+.social-icons .social-icon:hover {
+  color: #0056b3;
+  transform: scale(1.2);
 }
 
 .footer-copy {
-  text-align: center;
-  color: #aaa;
-  font-size: 15px;
-}
-
-.text-yellow {
-  color: #ffcc00;
-}
-
-
-.social-icon {
-  color: #aaa;
-  text-decoration: none;
-  font-size: 20px;
-  transition: color 0.3s;
-}
-
-.social-icon:hover {
-  color: #ffcc00;
-}
-
-
-.container {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 0 10px;
+  font-size: 14px;
+  color: #6c757d;
 }
