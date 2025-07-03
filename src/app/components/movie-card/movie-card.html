@@ -4,27 +4,33 @@
 <!-- Card -->
 <div class="container card-container">
     @for(movie of data.moviesSignal(); track movie.id) {
-        <div class="row ms-2">
-            <mat-card class="example-card mb-4" >
-                <a [routerLink]="['/movie', movie.id]">
-                    <img class="posterImg" mat-card-image [src]="data.imagesBaseURL+movie.poster_path" alt="Photo of {{movie.title}}">
-                </a>
-                <mat-card-content class="text-start">
-                    <a [routerLink]="['/movie', movie.id]" style="text-decoration: none; color: inherit;">
-                        <h6 class="mt-4">{{movie.title}}</h6>
+            <div class="movie-card">
+                    <!-- Poster -->
+                    <a [routerLink]="['/movie', movie.id]">
+                        <img class="poster-img" [src]="data.imagesBaseURL + movie.poster_path" alt="Poster of {{ movie.title }}">
                     </a>
-                    <p class="d-inline">{{movie.release_date | date: 'longDate'}}</p>
-                    @if(isInWishlist(movie.id))
-                    {
-                        <i (click)="ToggleToWishlist(movie.id)" class="fa-solid fa-heart add-to-favourite"></i>
-                    }
-                    @else {
-                        <i (click)="ToggleToWishlist(movie.id)" class="fa-regular fa-heart add-to-favourite"></i>
-                    }
-                </mat-card-content>
-                
-            </mat-card>
-        </div>
+
+                    <!-- Content -->
+                    <div class="movie-info">
+                        <div class="movie-header">
+                        <a [routerLink]="['/movie', movie.id]" class="movie-title">
+                            {{ movie.title }}
+                        </a>
+                        @if(isInWishlist(movie.id)) {
+                            <i (click)="ToggleToWishlist(movie.id)" class="fa-solid fa-heart heart-icon"></i>
+                        }
+                        @else {
+                            <i (click)="ToggleToWishlist(movie.id)" class="fa-regular fa-heart heart-icon"></i>
+                        }
+                        </div>
+
+                        <div class="movie-details-row">
+                            <div class="movie-rating">⭐ {{ movie.vote_average.toFixed(1) }}</div>
+                            <div class="movie-date">{{ movie.release_date | date: 'longDate' }}</div>
+                        </div>
+                    </div>
+                </div>
+
     }
 </div>
 <button class="back-to-top" (click)="scrollToTop()" [class.show]="showButton">
@@ -32,10 +38,10 @@
 </button>
 <!-- Pagination -->
  <div class="paginator-wrapper">
-<mat-paginator class="custom-paginator" [length]="250"
-                [pageSize]="1"
-                [hidePageSize]="true"
-                [showFirstLastButtons]="true"
-                (page)="pageEvent($event)"
-></mat-paginator>
+    <mat-paginator class="custom-paginator" [length]="250"
+                    [pageSize]="1"
+                    [hidePageSize]="true"
+                    [showFirstLastButtons]="true"
+                    (page)="pageEvent($event)"
+    ></mat-paginator>
 </div>
