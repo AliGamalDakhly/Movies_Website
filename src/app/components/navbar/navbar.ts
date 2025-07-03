@@ -79,7 +79,7 @@ export class Navbar {
   logout() {
     sessionStorage.removeItem('userEmail');
     this.username = null;
-    window.location.href = '/'; 
+    window.location.href = '/login'; 
   }
 
  
