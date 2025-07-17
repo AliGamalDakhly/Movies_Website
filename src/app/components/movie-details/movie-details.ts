@@ -35,35 +35,16 @@ export class MovieDetails implements OnInit {
               private firebaseService: Firebase) {}
 
   ngOnInit(): void {
-    const movieId = +this.route.snapshot.paramMap.get('id')!;
-
-     this.languageService.language$.subscribe((newLang) => {
-    this.movieService.getMovieById(movieId, newLang).subscribe(movie => {
-      this.movie = movie;
-      this.language = newLang;
-    });
-    this.movieService.getRecommendedMovies(movieId, newLang ).subscribe(res => {
-        this.recommendedMovies = res.results;
-    });
+  this.route.paramMap.subscribe(params => {
+    const movieId = +params.get('id')!;
+    this.loadMovieDetails(movieId);
   });
 
-  
-     this.movieService.getMovieVideos(movieId).subscribe(res => {
-    const trailer = res.results.find(
-      (video: any) => video.type === 'Trailer' && video.site === 'YouTube'
-    );
-    if (trailer) {
-      this.trailerKey = trailer.key;
-      const url = `https://www.youtube.com/embed/${this.trailerKey}`;
-      this.trailerUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url); // ✅ secure YouTube URL
-    }
+  // Init Firebase (once)
+  this.firebaseService.Init().then(() => {
+    this.currentUser = this.firebaseService.currentUser;
   });
-    
-    this.firebaseService.Init().then(() => {
-      this.currentUser = this.firebaseService.currentUser;
-});
-
-  }
+}
 
   isInWishlist(movieId: number): boolean {
   return this.firebaseService.wishlist.some(movie => movie.id === movieId);
@@ -89,5 +70,32 @@ async toggleWishlist(movieId: number) {
     }
   }
 }
+
+
+loadMovieDetails(movieId: number): void {
+  this.languageService.language$.subscribe((newLang) => {
+    this.language = newLang;
+
+    this.movieService.getMovieById(movieId, newLang).subscribe(movie => {
+      this.movie = movie;
+    });
+
+    this.movieService.getRecommendedMovies(movieId, newLang).subscribe(res => {
+      this.recommendedMovies = res.results;
+    });
+  });
+
+  this.movieService.getMovieVideos(movieId).subscribe(res => {
+    const trailer = res.results.find(
+      (video: any) => video.type === 'Trailer' && video.site === 'YouTube'
+    );
+    if (trailer) {
+      this.trailerKey = trailer.key;
+      const url = `https://www.youtube.com/embed/${this.trailerKey}`;
+      this.trailerUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    }
+  });
+}
+
 
 }

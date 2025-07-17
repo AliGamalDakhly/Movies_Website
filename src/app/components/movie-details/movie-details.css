@@ -1,104 +1,279 @@
+.movie-page-container {
+  width: 90%;
+  margin: 40px auto 80px;
+  padding: 0 20px;
+  color: #f1f1f1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Flex container for poster, info, trailer side by side */
 .movie-details-container {
   display: flex;
-  flex-wrap: wrap;
   gap: 30px;
-  padding: 40px;
-  background-color: #ffffff; /* أبيض ناعم */
-  border-radius: 12px;
-  margin: 30px auto;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05); /* خفيف */
+  background-color: #8fb4f1;
+  border-radius: 16px;
+  padding: 30px 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  align-items: space-around;
+  justify-content: space-around;
+  flex-wrap: nowrap;
 }
 
+/* Poster */
 .movie-poster {
-  width: 300px;
-  height: 450px;
+  width: 280px;
+  height: 420px;
   object-fit: cover;
   border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
 }
 
+/* Movie Info */
 .movie-info {
-  max-width: 600px;
+  max-width: 420px;
+  flex: 1 1 auto;
 }
 
 .movie-info h2 {
   margin-bottom: 20px;
-  color: #0d6efd; /* Bootstrap Primary */
+  color: #212529;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.fa-heart.add-to-favourite {
+  margin-left: 12px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: transform 0.3s, color 0.3s;
+  vertical-align: middle;
+}
+
+.fa-heart.add-to-favourite:hover {
+  transform: scale(1.2);
+  color: #ff4d4d;
 }
 
 .movie-info p {
   font-size: 1rem;
-  color: #333;
+  color: #212529;
   margin-bottom: 10px;
 }
 
+/* Trailer next to info */
 .trailer-container {
-  margin-top: 30px;
-  color: #032541;
+  width: 360px;
+  background-color: #8fb4f1;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  padding: 15px 10px;
+  flex-shrink: 0;
 }
 
+.trailer-container h3 {
+  margin-bottom: 12px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #212529;
+}
+
+/* Recommended movies below */
 .recommended-section {
-  margin-top: 40px;
+  margin-top: 60px;
 }
 
 .recommended-section h3 {
-  margin-left: 24px;
-  font-weight: 600;
-  font-size: 1.5rem;
-  color: #0d6efd;
-}
-
-.posterImg {
-  width: 100%;
-  height: 240px;
-  object-fit: cover;
-  border-bottom: 1px solid #dee2e6;
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #212529;
 }
 
 .card-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center;  
+  gap: 20px;
+  justify-content: center;
 }
 
-.example-card {
-  width: 160px;
-  min-height: 320px;
-  background-color: #ffffff;
-  border-radius: 12px;
+.movie-card {
+  background-color: #bfcee5 !important;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
   transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
+  width: 20%; /* or adjust as needed */
+  border-radius: 12px;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+.poster-img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  display: block;
+  background-color: #000;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.movie-info-2 {
+  padding: 12px 16px;
+  background-color: #bfcee5;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.movie-header {
+  display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.example-card:hover {
-  transform: translateY(-6px) scale(1.03);
+.movie-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #0a041e;
+  text-decoration: none;
 }
 
-mat-card-content {
-  padding: 10px;
-  text-align: center;
+.movie-title:hover {
+  text-decoration: underline;
 }
 
-mat-card-content h6 {
-  font-size: 0.9rem;
-  color: #032541;
-  margin: 8px 0 0;
-  line-height: 1.2;
-  max-height: 2.4em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.add-to-favourite {
+.heart-icon {
+  font-size: 1.1rem;
+  color: #ff4d4d;
   cursor: pointer;
-  transition: color 0.3s ease;
+  transition: transform 0.3s;
 }
 
-.add-to-favourite:hover {
-  color: #ff4081; /* وردي للتفاعل */
+.heart-icon:hover {
+  transform: scale(1.2);
+}
+
+.movie-details-row {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.movie-rating {
+  color: #ffc107;
+}
+
+.movie-date {
+  color: #0a041e !important;
+  font-size: 0.85rem;
+  margin-left: 10px;
+}
+
+
+:host-context(body.dark-mode) .movie-details-container {
+  background-color: #131212;
+
+}
+:host-context(body.dark-mode) .movie-info h2 {
+  color: #01b4e4;
+}
+
+:host-context(body.dark-mode) .movie-info p {
+  color: #e0d8d8;
+}
+
+:host-context(body.dark-mode) .trailer-container {
+  background-color: #131212;
+}
+
+:host-context(body.dark-mode) .trailer-container h3 {
+  color: #90cea1;
+}
+
+:host-context(body.dark-mode) .recommended-section h3 {
+  color: #01b4e4;
+}
+
+:host-context(body.dark-mode) .example-card {
+  background-color: #131212;
+}
+
+:host-context(body.dark-mode) .movie-info-2 {
+  background-color: #131212;
+}
+
+:host-context(body.dark-mode) .movie-date {
+  color: #e0d8d8 !important;
+}
+:host-context(body.dark-mode) .movie-title {
+  color: #e0d8d8;
+}
+
+:host-context(body.dark-mode) .movie-card {
+  background-color: #131212 !important;
+}
+
+/* ================== RESPONSIVE ================== */
+
+@media (max-width: 992px) {
+  .movie-details-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 15px;
+  }
+
+  .movie-poster {
+    width: 80%;
+    height: auto;
+    max-width: 300px;
+  }
+
+  .movie-info {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+
+  .trailer-container {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 20px;
+  }
+
+  .movie-info h2 {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .movie-card {
+    width: 45%;
+  }
+}
+
+@media (max-width: 576px) {
+  .movie-card {
+    width: 100%;
+  }
+
+  .movie-details-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .movie-title {
+    font-size: 1rem;
+  }
+
+  .trailer-container iframe {
+    height: 200px;
+  }
 }

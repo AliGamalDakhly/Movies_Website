@@ -135,7 +135,7 @@
 .movie-rating,
 .movie-date {
   font-size: 0.9rem;
-  color: #0a041e;
+  color: #0a041e !important;
 }
 
 :host-context(body.dark-mode) .movie-info {
@@ -213,8 +213,10 @@ body:not(.dark-mode) ::ng-deep .custom-paginator .mat-mdc-icon-button {
   color: #e0d8d8;
 }
 
-:host-context(body.dark-mode)  .movie-rating,
-.movie-date {
-  font-size: 0.9rem;
+:host-context(body.dark-mode)  .movie-rating {
   color: #e0d8d8 !important;
+}
+
+:host-context(body.dark-mode) .movie-date{
+    color: #e0d8d8 !important;
 }

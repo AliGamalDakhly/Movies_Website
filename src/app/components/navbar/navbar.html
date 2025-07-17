@@ -1,31 +1,35 @@
-<nav class="navbar-container navbar navbar-expand-lg" [ngClass]="{'dark-mode': isDarkMode}">
+<nav class="navbar navbar-expand-lg navbar-container" [ngClass]="{ 'dark-mode': isDarkMode }">
   <div class="container-fluid">
 
-    <!-- Left Section -->
-    <div class="d-flex align-items-center">
-      <a class="navbar-brand app-title d-flex align-items-center gap-2" routerLink="/">
-        <img src="https://cdn-icons-png.flaticon.com/512/17115/17115490.png" alt="movie logo" class="movie-logo-icon" />
-        <span class="text">Aflamko</span>
-      </a>
+    <!-- Brand + Toggler -->
+    <a class="navbar-brand app-title d-flex align-items-center gap-2" routerLink="/">
+      <img src="https://cdn-icons-png.flaticon.com/512/17115/17115490.png" alt="movie logo" class="movie-logo-icon" />
+      <span class="text">Aflamko</span>
+    </a>
 
-      <ul class="navbar-nav flex-row gap-3 align-items-center ms-3">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+      aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible Content -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <!-- LEFT LINKS -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex gap-lg-3">
         <li class="nav-item">
           <a class="nav-link fw-semibold theme-text" routerLink="/">
             {{ language === 'ar' ? 'الرئيسية' : 'Home' }}
           </a>
         </li>
-         <li class="nav-item">
-           <a class="nav-link" routerLink="/Genre">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/Genre">
             {{ language === 'ar' ? 'الأنواع' : 'Genres' }}
           </a>
         </li>
-        
-        <!-- Wishlist with Heart Icon -->
         <li class="nav-item position-relative">
-          <a class=" icon-link" routerLink="/wishlist">
+          <a class="nav-link icon-link" routerLink="/wishlist">
             <img src="https://cdn-icons-png.flaticon.com/512/15017/15017504.png"
-                 alt="wishlist"
-                 class="wishlist-img-icon" />
+                 alt="wishlist" class="wishlist-img-icon" />
             <span *ngIf="firebaseService.currentUser"
                   class="wishlist-badge badge rounded-pill bg-danger">
               {{ firebaseService.wishlist.length }}
@@ -33,44 +37,39 @@
           </a>
         </li>
       </ul>
-    </div>
 
-    <!-- Right Section -->
-    <div class="d-flex align-items-center gap-3">
+      <!-- RIGHT ACTIONS -->
+      <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-2 ms-lg-auto">
+        <select class="form-select form-select-sm language-select" [(ngModel)]="language"
+                (ngModelChange)="onChange()">
+          <option *ngFor="let lang of languages" [value]="lang">{{ lang }}</option>
+        </select>
 
-      <select class="form-select form-select-sm language-select" [(ngModel)]="language" (ngModelChange)="onChange()">
-        <option *ngFor="let lang of languages" [value]="lang">{{ lang }}</option>
-      </select>
+        <button class="btn theme-toggle-btn" (click)="toggleDarkMode()">
+          <img
+            [src]="isDarkMode
+              ? 'https://cdn-icons-png.flaticon.com/512/2490/2490255.png'
+              : 'https://cdn-icons-png.flaticon.com/512/2490/2490148.png'"
+            alt="Toggle Theme"
+            class="mode-icon"
+          />
+        </button>
 
-      <button class="btn theme-toggle-btn" (click)="toggleDarkMode()">
-        <img
-          [src]="isDarkMode
-            ? 'https://cdn-icons-png.flaticon.com/512/2490/2490255.png'
-            : 'https://cdn-icons-png.flaticon.com/512/2490/2490148.png'"
-          alt="Toggle Theme"
-          class="mode-icon"
-        />
-      </button>
+        <span class="username" *ngIf="firebaseService.currentUser">
+          {{ firebaseService.currentUser.FirstName }}
+        </span>
 
-
-      <span class="username" *ngIf="firebaseService.currentUser">
-        {{ firebaseService.currentUser.FirstName }}
-      </span>
-
-      <a *ngIf="firebaseService.currentUser; else guest"
-         class="btn btn-outline-light  auth-btn"
-         routerLink="/login"
-         (click)="logout()">
-         {{ language === 'ar' ? 'تسجيل خروج' : 'Logout' }}
-      </a>
-
-      <ng-template #guest>
-        <a class="btn btn-outline-light  auth-btn" routerLink="/login">
-          {{ language === 'ar' ? 'تسجيل دخول' : 'Login' }}
+        <a *ngIf="firebaseService.currentUser; else guest" class="btn btn-outline-light auth-btn"
+           routerLink="/login" (click)="logout()">
+          {{ language === 'ar' ? 'تسجيل خروج' : 'Logout' }}
         </a>
-      </ng-template>
 
+        <ng-template #guest>
+          <a class="btn btn-outline-light auth-btn" routerLink="/login">
+            {{ language === 'ar' ? 'تسجيل دخول' : 'Login' }}
+          </a>
+        </ng-template>
+      </div>
     </div>
   </div>
 </nav>
-

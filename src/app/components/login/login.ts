@@ -6,7 +6,9 @@ import { AuthService } from '../../services/auth.service'; // Adjust path as nee
 
 @Component({
   selector: 'app-login',
+
   imports: [RouterLink,ReactiveFormsModule, CommonModule
+
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
